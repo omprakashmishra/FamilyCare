@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sliding_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grocery_bg"
+    android:gravity="bottom"
+    android:keepScreenOn="true"
+    sothree:umanoDragView="@+id/dragView"
+    sothree:umanoOverlay="true"
+    sothree:umanoPanelHeight="25dp"
+    sothree:umanoParallaxOffset="0dp"
+    sothree:umanoScrollableView="@+id/list"
+    sothree:umanoShadowHeight="4dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/RV_groceryHistoryList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+               >
+
+            </android.support.v7.widget.RecyclerView>
+
+            <ProgressBar
+                android:id="@+id/mprogressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:indeterminateDrawable="@drawable/circular_progressbar"
+                android:visibility="visible"></ProgressBar>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/dragView"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="#80ffffff"
+        android:clickable="true"
+        android:focusable="false"
+        android:orientation="vertical"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginBottom="0dp"
+                android:background="@color/dark_red">
+
+                <TextView
+                    android:id="@+id/TV_totalAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerHorizontal="true"
+                    android:clickable="true"
+                    android:fontFamily="serif"
+                    android:paddingTop="3dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="Total Amount :"
+                    android:textColor="@color/white_fade"
+                    android:textSize="@dimen/margin_13dp" />
+
+                <ImageView
+                    android:id="@+id/iv_up_down"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="@dimen/margin_2dp"
+                    android:padding="2dp"
+                    android:src="@drawable/sorting_ic" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="155dp"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:id="@+id/TV_fromDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:textColor="@color/white"
+                                android:textColorHint="@color/white"
+                                android:layout_gravity="center"
+                                android:textSize="@dimen/head"
+                                android:background="@color/theme_color"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:padding="3dp"
+                                android:hint="Start Date"/>
+                            <TextView
+                                android:layout_weight="1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:textColor="@color/brown"
+                                android:textSize="@dimen/head"
+                                android:layout_gravity="center"
+                                android:text="To"/>
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:id="@+id/TV_toDate"
+                                android:padding="3dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:hint="End Date"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:textColor="@color/white"
+                                android:textColorHint="@color/white"
+                                android:layout_gravity="center"
+                                android:textSize="@dimen/head"
+                                android:background="@color/theme_color"
+                                />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/TV_row_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/black"
+                                android:text=""
+                                android:textSize="@dimen/body"
+                                android:padding="7dp"/>
+                            <TextView
+                                android:id="@+id/TV_row_price"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/RedFadeColor"
+                                android:textSize="@dimen/body"
+                                android:padding="7dp"/>
+                        </LinearLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
+                            <TextView
+                                android:id="@+id/TV_searchTotalPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/theme_fade"
+                                android:text=""
+                                android:textSize="15dp"
+                                android:textStyle="bold"
+                                android:layout_centerVertical="true"
+                                android:layout_centerHorizontal="true" />
+                            <ImageView
+                                android:id="@+id/IV_search"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_search"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
+                                android:visibility="gone"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                </ScrollView>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

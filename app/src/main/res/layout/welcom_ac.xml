@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_select_package"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/brown" />
+
+
+        <Button
+            android:id="@+id/BT_getstarted"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/margin_40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="100dp"
+            android:gravity="center"
+            android:text="Get Started"
+            android:backgroundTint="@color/theme_color"
+            android:background="@drawable/dark_red_bg"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:onClick="onclick_TV_regis"
+            android:textSize="14dp" />
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_above="@+id/BT_getstarted"
+            android:background="#00FFFFFF" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:layout_marginTop="50dp"
+            android:text="@string/wecomeFirst"
+            android:textSize="14dp"
+            android:onClick="onclick_TV_login"
+            android:layout_below="@+id/indicator"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+</LinearLayout>

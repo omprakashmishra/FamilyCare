@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/LL_trackinglayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp">
+
+            <TextView
+                android:id="@+id/TV_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/body"
+                android:text="LastTime show"
+                android:paddingRight="5dp"
+                android:textAllCaps="true"
+                android:layout_alignParentRight="true"/>
+
+            <Button
+                android:id="@+id/BT_firstletter"
+                android:layout_width="@dimen/margin_35dp"
+                android:layout_height="@dimen/margin_35dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/orangecirclebutton"
+                android:maxLength="1"
+                android:text="Ts"
+                android:textColor="@color/white"
+                android:textSize="@dimen/margin_14dp"
+                android:visibility="gone"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/IV_frinds_img"
+                android:layout_width="@dimen/margin_35dp"
+                android:layout_height="@dimen/margin_35dp"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginTop="3dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <ProgressBar
+                android:id="@+id/mprogressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:indeterminateDrawable="@drawable/circular_progressbar"
+                android:visibility="visible"
+                android:layout_marginLeft="8dp"
+                android:layout_centerVertical="true"
+                android:layout_alignLeft="@+id/IV_frinds_img"
+                android:layout_alignStart="@+id/IV_frinds_img"></ProgressBar>
+
+            <RelativeLayout
+                android:id="@+id/lay1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/IV_frinds_img"
+                android:layout_toRightOf="@+id/IV_frinds_img"
+                android:layout_marginTop="7dp"
+                android:layout_marginLeft="10dp"  >
+
+                <ImageView
+                    android:id="@+id/IV_on_off_line"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/offline_ic" />
+
+                <TextView
+                    android:id="@+id/groupmembername"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/IV_on_off_line"
+                    android:layout_toRightOf="@+id/IV_on_off_line"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:singleLine="true"
+                    android:text="Sandeep Kumar kesarwani "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_12sp" />
+
+                <ImageView
+                    android:id="@+id/battery"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/battery_icon"
+                    android:layout_below="@+id/groupmembername"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/batterypercentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="3dp"
+                    android:singleLine="true"
+                    android:text="80%"
+                    android:textSize="9dp"
+                    android:layout_marginTop="3.5dp"
+                    android:layout_below="@+id/groupmembername"
+                    android:layout_toRightOf="@+id/battery"
+                    android:layout_toEndOf="@+id/battery" />
+
+                <TextView
+                    android:id="@+id/online"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="online status"
+                    android:textColor="@color/RedFadeColor"
+                    android:textSize="9sp"
+                    android:layout_marginTop="3.5dp"
+                    android:layout_below="@+id/groupmembername"
+                    android:layout_toRightOf="@+id/batterypercentage"
+                    android:layout_toEndOf="@+id/batterypercentage" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/RV_acceptdecline"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+               android:layout_marginTop="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+                <ImageView
+                    android:id="@+id/IV_navigation"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/google_map_ic"
+                    android:scaleType="centerInside"
+                    android:visibility="visible"
+                      />
+
+                <RelativeLayout
+                    android:id="@+id/RL_chatNotif"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_toRightOf="@+id/IV_navigation"
+                    android:layout_toEndOf="@+id/IV_navigation">
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_message"
+                        android:tint="@color/white"
+                        android:scaleType="centerInside"
+                        android:visibility="visible"
+                        android:padding="5dp"
+                        android:background="@drawable/circular_bg"
+                        android:backgroundTint="@color/green"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/imageView5" />
+                    <TextView
+                        android:id="@+id/TV_messageCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textSize="12dp"
+                        android:background="@drawable/circular_bg"
+                        android:maxLength="1"
+                        android:text="0"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/track"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ic_phone"
+                    android:backgroundTint="@color/theme_dark"
+                    android:scaleType="center"
+                    android:text=""
+                    android:layout_marginRight="3dp"
+                    android:visibility="visible"
+                    android:layout_alignBottom="@+id/IV_navigation"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Plot No.37, First Floor, Sector-5 India "
+            android:textAlignment="center"
+            android:textColor="@color/brown"
+            android:textSize="9sp"
+            android:visibility="visible" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.50dp"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:background="@color/colorPrimary"></View>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

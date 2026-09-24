@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/theme_dark" />
+
+        <TextView
+            android:id="@+id/TV_FamilyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/tree_tag"
+            android:textColor="@color/theme_dark"
+            android:gravity="top"
+            android:textAllCaps="true"
+            android:hint="My Family Name"
+            android:paddingBottom="18dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="3dp"
+            android:textAlignment="center"
+            android:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/IV_editGroup"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/pen_ic"
+            android:layout_marginRight="10dp"
+            android:tint="@color/gold"
+            android:layout_alignParentRight="true" />
+
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ProgressBar
+            android:id="@+id/mprogressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:indeterminateDrawable="@drawable/circular_progressbar"
+            android:visibility="gone"></ProgressBar>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/LL_bottom">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/RV_friendsList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/LL_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/theme_color"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="1">
+
+            <ImageView
+                android:id="@+id/IV_phonebook"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="5dp"
+                android:background="@color/white"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
+                android:src="@drawable/phonebook_ic" />
+
+            <RelativeLayout
+                android:id="@+id/RL_phoneNM"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.82"
+                android:background="@drawable/rectangular_white">
+
+                <EditText
+                    android:id="@+id/TV_Name"
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:background="@null"
+                    android:hint="Name"
+                    android:paddingLeft="15dp"
+                    android:textColor="@color/green"
+                    android:textColorHint="@color/brown"
+                    android:textSize="@dimen/head" />
+
+                <EditText
+                    android:id="@+id/TV_Phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/TV_Name"
+                    android:layout_toRightOf="@+id/TV_Name"
+                    android:background="@null"
+                    android:hint="Phone."
+                    android:inputType="phone"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/theme_dark"
+                    android:textColorHint="@color/brown"
+                    android:textSize="@dimen/head"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/RL_addFamily"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.15">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="40sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/circular_bg"
+                    android:padding="2dp"
+                    android:src="@drawable/ok_red"
+                    android:tint="@color/white" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

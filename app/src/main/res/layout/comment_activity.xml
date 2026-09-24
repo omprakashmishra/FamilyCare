@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_chat"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/appbg"
+       >
+
+        <ProgressBar
+            android:id="@+id/mprogressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:indeterminateDrawable="@drawable/circular_progressbar"
+            android:visibility="visible"></ProgressBar>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/commentsListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="55dp"
+            android:scrollbars="vertical" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/theme_color"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.80"
+                android:background="@drawable/rectangular_white"
+                android:gravity="center|left">
+
+                <EditText
+                    android:id="@+id/writeComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="Type your message here."
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/theme_dark"
+                    android:textColorHint="@color/brown"
+                    android:textSize="@dimen/head" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.20">
+
+                <TextView
+                    android:id="@+id/sendComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="40sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/circular_bg"
+
+                    android:padding="10dp"
+                    android:src="@drawable/sent_item"
+                    android:tint="@color/white" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

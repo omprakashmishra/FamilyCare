@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+
+    tools:context=".Profile.ViewImage_Ac">
+
+    <include layout="@layout/toolbar_back" />
+
+    <ProgressBar
+        android:id="@+id/mprogressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/circular_progressbar"
+        android:visibility="visible"></ProgressBar>
+
+    <ImageView
+        android:id="@+id/IV_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="matrix"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

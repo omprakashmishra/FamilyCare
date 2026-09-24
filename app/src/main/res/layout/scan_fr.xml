@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screenBackground"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Your Scan Result"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/TV_dateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="2dp"
+            android:text="Your Scan Result"
+            android:textColor="@color/CarbonGray"
+            android:textSize="11dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+       >
+
+        <TextView
+            android:id="@+id/TV_barcodeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/lightGrey"
+            android:padding="@dimen/margin_5dp"
+            android:autoLink="web"
+            android:textColor="@color/theme_dark"
+            android:textColorLink="@color/black"
+            android:textSize="@dimen/head" />
+
+        <include layout="@layout/view" />
+
+        <EditText
+            android:id="@+id/ET_extraComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:textColorHint="@color/brown"
+            android:hint="Enter comment about scan"
+            android:padding="5dp"
+            android:textAlignment="center"
+            android:textColor="@color/darkgrey"
+            android:textSize="@dimen/title" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/IV_goto"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/circular_bg"
+            android:backgroundTint="@color/white"
+            android:padding="5dp"
+            android:src="@drawable/icon_upload" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/IV_goto"
+            android:layout_marginLeft="5dp"
+            android:text="Open"
+            android:textColor="@color/brown" />
+
+        <ImageView
+            android:id="@+id/IV_share"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/circular_bg"
+            android:backgroundTint="@color/white"
+            android:padding="5dp"
+            android:tint="@color/theme_dark"
+            app:srcCompat="@drawable/icon_share" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/IV_share"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:text="Share"
+            android:textColor="@color/brown" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/BT_addToGrocery"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:background="@color/theme_color"
+            android:shadowColor="@color/Red_color"
+            android:shadowRadius="5"
+            android:text="Add In Family Shopping List"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/IV_barcode"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_bg_ic"
+            android:padding="25dp"
+
+            app:srcCompat="@drawable/barcode_ic" />
+    </LinearLayout>
+</LinearLayout>

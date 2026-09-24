@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RL_row"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="5dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/RL_calender"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/GrayCloud"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/theme_dark"
+            android:gravity="center"
+            android:maxLength="3"
+            android:text="month"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_day"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:layout_marginTop="2.5dp"
+            android:gravity="bottom|center_horizontal"
+            android:maxLength="3"
+            android:text="10"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|center_horizontal"
+            android:text="2000"
+
+            android:textAllCaps="true"
+            android:textColor="@color/CarbonGray"
+            android:textSize="10dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/RL_calender"
+        android:layout_marginRight="77dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/RL_calender"
+        android:layout_toRightOf="@+id/RL_calender"
+        android:singleLine="true"
+        android:text="@string/no_title"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_short_dis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginRight="55dp"
+        android:layout_toEndOf="@+id/RL_calender"
+        android:layout_toRightOf="@+id/RL_calender"
+        android:singleLine="true"
+        android:text="short disc..."
+        android:textColor="@color/brown"
+        android:textSize="@dimen/title" />
+
+    <TextView
+        android:id="@+id/date_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10sp"
+        android:text="date time"
+        android:visibility="gone"
+        android:textSize="9sp" />
+
+    <ImageView
+        android:id="@+id/IV_deleteDiary"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/circular_bg"
+        android:backgroundTint="@color/dark_red"
+        android:padding="2dp"
+        android:src="@drawable/ic_menu_delete"
+        android:tint="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="2dp"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

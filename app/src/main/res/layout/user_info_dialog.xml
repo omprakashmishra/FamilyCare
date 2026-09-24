@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/IV_header"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"
+            android:background="@drawable/appbg" />
+        <ProgressBar
+            android:id="@+id/mprogressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@drawable/circular_progressbar"
+            android:visibility="gone"
+           ></ProgressBar>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/IV_header"
+            android:layout_marginTop="-28dp"
+            android:background="@color/light_black_transparent"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/TV_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+            android:text="X"
+            android:textColor="@color/dark_red"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tv_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/IV_header"
+            android:padding="5dp"
+            android:text="About"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="13dp" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="5dp">
+
+        <include layout="@layout/view" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/calender_ic"
+                android:tint="@color/colorPrimary"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+
+                <TextView
+                    android:id="@+id/tv_dob"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:hint="Date Of Birth"
+                    android:padding="2dp"
+                    android:paddingLeft="@dimen/margin_10dp"
+                    android:textColor="#000000"
+                    android:textColorHint="@color/darkgrey"
+                    android:textSize="@dimen/title" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <include layout="@layout/view" />
+
+        <TextView
+            android:id="@+id/TV_last_seen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Last Seen:"
+            android:textColor="@color/Red_color"
+            android:gravity="right"
+            android:textSize="11dp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+
+
+            <ImageView
+                android:id="@+id/routeLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerInParent="true"
+                android:src="@drawable/route_ic"
+                />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/TV_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Address:"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="10dp" />
+
+        <include layout="@layout/view" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:background="@color/white">
+
+
+        <ImageView
+            android:id="@+id/IV_message"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/circular_bg"
+            android:padding="5dp"
+            android:src="@drawable/icon_comment"
+            android:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/IV_call"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/circular_bg"
+            android:padding="7dp"
+            android:src="@drawable/ic_phone"
+            android:tint="@color/white" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/IV_navigate"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-25dp"
+        android:background="@drawable/circular_bg"
+        android:backgroundTint="@color/green"
+        android:padding="10dp"
+        android:src="@drawable/sent_item"
+        android:tint="@color/white"/>
+
+
+</LinearLayout>

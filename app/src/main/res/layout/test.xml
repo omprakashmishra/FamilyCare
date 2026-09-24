@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/IV_header"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_centerHorizontal="true"
+
+            android:background="@drawable/appbg" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/IV_header"
+            android:layout_marginTop="-28dp"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/TV_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
+            android:text="X"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tv_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/IV_header"
+            android:padding="5dp"
+            android:text="About"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="13dp" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="35dp">
+
+        <include layout="@layout/view" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/calender_ic"
+                android:tint="@color/colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+
+                <EditText
+                    android:id="@+id/ET_Name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:hint="Name"
+                    android:padding="2dp"
+                    android:paddingLeft="@dimen/margin_10dp"
+                    android:textColor="#000000"
+                    android:textColorHint="@color/darkgrey"
+                    android:textSize="@dimen/title" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <include layout="@layout/view" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/IV_message"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/circular_bg"
+            android:padding="8dp"
+            android:src="@drawable/ic_message"
+            android:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/IV_call"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/circular_bg"
+            android:padding="7dp"
+            android:src="@drawable/ic_phone"
+            android:tint="@color/white" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/IV_done"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/dark_circle_button"
+        android:backgroundTint="@color/white"
+        android:padding="8dp"
+        android:src="@drawable/track" />
+
+
+</LinearLayout>

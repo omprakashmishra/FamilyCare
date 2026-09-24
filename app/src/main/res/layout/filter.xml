@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog"
+    android:layout_width="250dp"
+    android:layout_height="250dp"
+    android:background="@drawable/profile_bg"
+
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/theme_dark"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Filter"
+        android:textColor="@color/white" />
+
+    <RadioButton
+        android:id="@+id/rd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="10dp"
+        android:text="A - Z"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <include layout="@layout/view" />
+
+    <RadioButton
+        android:id="@+id/rd_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rd"
+
+        android:padding="10dp"
+        android:text="Z - A"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+</LinearLayout>

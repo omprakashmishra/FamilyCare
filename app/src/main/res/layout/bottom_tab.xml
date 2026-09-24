@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottomDrawer"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/layer"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:visibility="visible">
+
+    <LinearLayout
+        android:id="@+id/tab_1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:onClick="ChangeTab"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/petTab"
+            android:layout_width="34dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="7"
+            android:padding="5dp"
+            android:src="@drawable/home_ic"
+            android:tint="@color/brown" />
+
+        <TextView
+            android:id="@+id/TVHome"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center|top"
+            android:text="Home"
+            android:textColor="@color/black"
+            android:textSize="9dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tab_2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:onClick="ChangeTab"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/searchTab"
+            android:layout_width="34dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="7"
+            android:padding="5dp"
+            android:src="@drawable/ic_phone"
+            android:tint="@color/brown" />
+
+        <TextView
+            android:id="@+id/TVSearch"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center|top"
+            android:text="Call"
+            android:textColor="@color/black"
+            android:textSize="9dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tab_3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:onClick="ChangeTab"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/likeTab"
+            android:layout_width="34dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="7"
+            android:padding="4dp"
+            android:src="@drawable/icon_comment"
+             />
+
+        <TextView
+            android:id="@+id/TVFav"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center|top"
+            android:text="Chat"
+            android:textColor="@color/black"
+            android:textSize="9dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tab_4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:onClick="ChangeTab"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/calenderTab"
+            android:layout_width="34dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="7"
+            android:padding="5dp"
+            android:src="@drawable/barcode_ic"
+            android:tint="@color/brown" />
+
+        <TextView
+            android:id="@+id/TVbh"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center|top"
+            android:text="Scan"
+            android:textColor="@color/black"
+            android:textSize="9dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tab_5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:onClick="ChangeTab"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:weightSum="10">
+
+        <ImageView
+            android:id="@+id/profileTab"
+            android:layout_width="34dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="7"
+            android:padding="4dp"
+            android:src="@drawable/shopping_ic"
+            android:tint="@color/brown" />
+
+        <TextView
+            android:id="@+id/TVaccount"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center|top"
+            android:text="Shopping"
+            android:textColor="@color/black"
+            android:textSize="9dp" />
+    </LinearLayout>
+
+
+</LinearLayout>
+

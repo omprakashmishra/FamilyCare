@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:text="Family Care"
+        android:textColor="@color/dark_red"
+        android:textSize="30dp"
+        android:layout_alignBottom="@+id/Iv_splash"
+        android:layout_centerHorizontal="true" />
+    <ImageView
+        android:id="@+id/Iv_splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/margin_50dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:id="@+id/LL_prgressBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:gravity="left"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ProgressBar
+            android:id="@+id/mprogressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:indeterminateDrawable="@drawable/circular_progressbar"
+            android:visibility="visible"></ProgressBar>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:textColor="@color/theme_color"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:textSize="9dp"
+
+            android:text="Loading …" />
+    </LinearLayout>
+
+</RelativeLayout>

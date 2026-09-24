@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RL_row"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:layout_marginTop="1.5dp"
+    android:paddingBottom="2dp"
+    android:background="@drawable/layerdark"
+    android:paddingTop="5dp">
+
+    <RelativeLayout
+        android:id="@+id/RL_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="15dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/IV_frinds_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/teacher_fml" />
+
+        <ProgressBar
+            android:id="@+id/mprogressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@drawable/circular_progressbar"
+            android:visibility="gone"></ProgressBar>
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/RL_image"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/RL_image"
+        android:layout_toRightOf="@+id/RL_image"
+        android:text="@string/no_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title" />
+
+    <TextView
+        android:id="@+id/tv_short_dis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/RL_image"
+        android:layout_toRightOf="@+id/RL_image"
+        android:maxLength="28"
+        android:singleLine="true"
+        android:text="short disc..."
+        android:textColor="@color/lightGrey"
+        android:textSize="@dimen/body" />
+
+    <TextView
+        android:id="@+id/tv_date_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10sp"
+        android:text="date time"
+        android:textColor="@color/screenBackground"
+        android:textSize="9sp" />
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_alignEnd="@+id/tv_date_row"
+        android:layout_alignRight="@+id/tv_date_row"
+        android:layout_centerVertical="true"
+        android:src="@drawable/right_icon"
+        android:tint="@color/GrayCloud" />
+
+</RelativeLayout>

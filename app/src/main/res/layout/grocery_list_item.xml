@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RL_row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="3dp"
+    android:background="@color/white">
+
+
+    <RelativeLayout
+        android:id="@+id/RV_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/TV_itemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/IV_item_delete"
+            android:layout_toLeftOf="@+id/CB_isShopped"
+            android:layout_toStartOf="@+id/CB_isShopped"
+            android:paddingTop="5dp"
+            android:text="My grocery List "
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+
+
+        <CheckBox
+            android:id="@+id/CB_isShopped"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/IV_item_delete"
+            android:layout_toStartOf="@+id/IV_item_delete"
+            android:checked="false" />
+
+        <ImageView
+            android:id="@+id/IV_item_delete"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_menu_delete"
+            android:tint="@color/dark_red" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/TV_added_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+        android:text="TV_added_by"
+        android:textAllCaps="true"
+        android:textColor="@color/brown"
+        android:textSize="8sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:layout_below="@+id/RV_2"
+        android:background="@color/theme_color" />
+
+</RelativeLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/appbg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/rectangular_white"
+        android:backgroundTint="@color/theme_dark"
+        android:padding="@dimen/margin_5dp">
+
+        <ImageView
+            android:id="@+id/IV_top_ic"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:tint="@color/white"
+            android:src="@drawable/notification" />
+
+
+        <TextView
+            android:id="@+id/head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+
+            android:layout_marginLeft="5dp"
+            android:text="Real time tracking of the person in emergency situation \n 3.1 miles away"
+            android:textColor="@color/white"
+            android:textSize="11dp" />
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/IV_giftest"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@mipmap/ic_launcher"
+            android:tint="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/fade_image"
+            android:visibility="gone"
+            android:id="@+id/imageView3" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF9C8">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/notelist_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="10sp"
+            android:textColor="@color/ShockingOrange"
+            android:textStyle="bold"
+            android:textSize="@dimen/body" />
+        <RelativeLayout
+            android:id="@+id/toplayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/notetop"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/title_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title"
+                android:textSize="@dimen/head" />
+
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="80dp"
+                android:layout_toRightOf="@+id/title_text1"
+                android:background="@android:color/transparent"
+                android:hint="@string/no_title"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:textSize="@dimen/head" />
+
+
+        </RelativeLayout>
+
+        <view xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/body"
+            class="com.omsworld.familycare.setting.LineEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toplayout"
+            android:background="@android:color/transparent"
+            android:capitalize="sentences"
+            android:fadingEdge="vertical"
+            android:gravity="top"
+            android:padding="5dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/theme_dark"
+            android:textSize="22sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="5dp">
+
+            <ImageView
+                android:id="@+id/IV_save"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/circular_bg"
+                android:padding="5dp"
+                android:src="@drawable/ok_red"
+                android:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/IV_delete"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/IV_save"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/circular_bg"
+                android:padding="2dp"
+                android:src="@drawable/ic_menu_delete"
+                android:tint="@color/white" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>
+
