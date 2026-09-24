@@ -1,10 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+     <color name="colorPrimary">#9C27B0</color>
+    <color name="colorPrimaryDark">#7B1FA2</color>
+    <color name="colorAccent">#FF5722</color>
+
+<!--
+    <color name="colorPrimary">#B71C1C</color>
+    <color name="colorPrimaryDark">#B71C1C</color>
+    <color name="colorAccent">#FF5722</color>-->
+
+    <color name="actionBarText">#ffffff</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+
+
+
+    <color name="lightGrey">#B6B6B4</color>
+    <color name="CarbonGray">#625D5D</color>
+    <color name="GrayCloud">#B6B6B4</color>
+    <color name="colorDividerText">#BDBDBD</color>
+    <color name="brown">#625D5D</color>
+    <color name="Lightgray">#817d7d</color>
+    <color name="black_light">#2b2b2b</color>
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="light_black_transparent">#58000000</color>
+
+    <color name="darkgrey">#282c2f</color>
+    <color name="highdarkgrey">#282c2f</color>
+
+    <color name="white_fade">#a7ffffff</color>
+    <color name="textColorPrimary">#000000</color>
+    <color name="colorMenuHeader">#FF5722</color>
+
+
+
+    <color name="screenBackground">#f5f2f2</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="green">#008000</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="ShockingOrange">#E55B3C</color>
+    <color name="darkorange">#ff471a</color>
+
+    <color name="theme_color">#9C27B0</color>
+    <color name="theme_dark">#7B1FA2</color>
+    <color name="theme_fade">#887B1FA2</color>
+
+<!--    <color name="theme_color">#B71C1C</color>
+    <color name="theme_dark">#B71C1C</color>-->
+
+    <color name="Red_color">#c32727</color>
+    <color name="gold">#FFD700</color>
+    <color name="dark_red">#B71C1C</color>
+    <color name="RedFadeColor">#88c32727</color>
+    <color name="BlueDark">#252F62</color>
+    <color name="LightGray">#F1F1F1</color>
+    <color name="tab_color">#e7e7e7</color>
 </resources>

@@ -1,28 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.omsworld.familycare">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FamilyCare">
+        android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.FamilyCare"
-            android:windowSoftInputMode="adjustResize">
+            android:name=".activity.SplashActivity_Two"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="Home"
+            android:screenOrientation="portrait"
+
+            android:windowSoftInputMode="adjustResize|stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.omsworld.familycare.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.SignInUpActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".activity.SignUpActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.Payment_ConfermationAc"
+            android:screenOrientation="portrait"
+              />
+        <activity
+            android:name=".activity.NotificationActivity"
+            android:excludeFromRecents="true"
+            android:taskAffinity="" />
+        <activity
+            android:name=".Shopping.ShoppingMain_Ac"
+            android:label="Shopping"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.omsworld.familycare.activity.MainActivity" />
+        </activity>
+
+
+
+        <!-- [START firebase_service] -->
+        <service
+            android:name=".firebase.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".firebase.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        //----------------------------------------------------------------------
+        <service android:name=".ServicesControl.CollegeJobService" />
+        <service android:name=".Chat.ChatService" />
+
+        <receiver android:name=".ServicesControl.RestartServiceReceiver">
+            <intent-filter>
+                <action android:name="StartKilledService" />
+            </intent-filter>
+        </receiver>
+        //-----------------------------------------------------------
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCuHSjKwAS6_uQKzvyc3T9QgxhBxC7qybk" />
+
+        <activity
+            android:name=".activity.VerifyPin"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="e22e8c3cb0292d817530da053a59bffdadb7aaa4" />
+
+        <activity android:name=".Shopping.ScanActivity"
+            android:label="Scan Now"/>
+
+        <activity android:name=".Shopping.InWeb.ShopInWeb_Ac"></activity>
+        <activity android:name=".activity.TermAndConditionsAc"></activity>
+        <activity android:name=".Profile.ViewImage_Ac"></activity>
     </application>
 
 </manifest>
