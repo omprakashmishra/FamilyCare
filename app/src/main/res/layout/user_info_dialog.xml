@@ -79,7 +79,7 @@
         android:orientation="vertical"
         android:paddingBottom="5dp">
 
-        <include layout="@layout/view" />
+        <include layout="@layout/divider_view" />
 
 
         <LinearLayout
@@ -121,7 +121,7 @@
 
         </LinearLayout>
 
-        <include layout="@layout/view" />
+        <include layout="@layout/divider_view" />
 
         <TextView
             android:id="@+id/TV_last_seen"
@@ -161,7 +161,7 @@
             android:textColor="@color/black"
             android:textSize="10dp" />
 
-        <include layout="@layout/view" />
+        <include layout="@layout/divider_view" />
     </LinearLayout>
 
 

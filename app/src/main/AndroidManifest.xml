@@ -1,120 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.omsworld.familycare">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ==================== PERMISSIONS ==================== -->
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission
+        android:name="android.permission.ACCESS_BACKGROUND_LOCATION"
+        tools:ignore="BackgroundLocationPolicy" />
+
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"
+        tools:ignore="ScopedStorage" />
+
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <!-- ==================== INTENT VISIBILITY (Android 11+) ==================== -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:scheme="tel" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.PICK" />
+            <data android:mimeType="*/*" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.GET_CONTENT" />
+            <data android:mimeType="*/*" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="text/plain" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="mailto" />
+        </intent>
+    </queries>
+
+    <!-- ==================== APPLICATION ==================== -->
     <application
-        android:allowBackup="true"
+        android:name=".FamilyCareApp"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="false"
+        tools:targetApi="34">
+
+        <!-- ============ SPLASH (LAUNCHER) ============ -->
         <activity
-            android:name=".activity.SplashActivity_Two"
+            android:name=".ui.splash.SplashActivityTwo"
+            android:exported="true"
             android:noHistory="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Legacy splash (non-launcher) -->
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".ui.splash.SplashActivity"
+            android:exported="false"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.Splash" />
+
+        <!-- ============ MAIN ============ -->
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="true"
             android:label="Home"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
-            android:windowSoftInputMode="adjustResize|stateHidden">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.omsworld.familycare.activity.MainActivity" />
-        </activity>
+        <!-- ============ AUTH ============ -->
         <activity
-            android:name=".activity.SignInUpActivity"
+            android:name=".ui.auth.SignInUpActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-            />
+            android:windowSoftInputMode="adjustResize" />
+
         <activity
-            android:name=".activity.SignUpActivity"
+            android:name=".ui.auth.SignUpActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
         <activity
-            android:name=".activity.Payment_ConfermationAc"
+            android:name=".ui.auth.VerifyPinActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
-              />
+            android:windowSoftInputMode="stateHidden" />
+
+        <!-- ============ PAYMENT ============ -->
         <activity
-            android:name=".activity.NotificationActivity"
+            android:name=".ui.payment.PaymentConfirmationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- ============ TERMS ============ -->
+        <activity
+            android:name=".ui.settings.TermAndConditionsActivity"
+            android:exported="false" />
+
+        <!-- ============ NOTIFICATION HANDLER ============ -->
+        <activity
+            android:name=".ui.main.NotificationActivity"
+            android:exported="false"
             android:excludeFromRecents="true"
             android:taskAffinity="" />
+
+        <!-- ============ SHOPPING ============ -->
         <activity
-            android:name=".Shopping.ShoppingMain_Ac"
+            android:name=".ui.shopping.ShoppingMainActivity"
+            android:exported="false"
             android:label="Shopping"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.omsworld.familycare.activity.MainActivity" />
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
+        <activity
+            android:name=".ui.shopping.ScanActivity"
+            android:exported="false"
+            android:label="Scan Now"
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.shopping.web.ShopInWebActivity"
+            android:exported="false" />
 
-        <!-- [START firebase_service] -->
+        <!-- ============ PROFILE ============ -->
+        <activity
+            android:name=".ui.profile.ViewImageActivity"
+            android:exported="false" />
+
+        <!-- ============ FIREBASE MESSAGING ============ -->
         <service
-            android:name=".firebase.MyFirebaseMessagingService">
+            android:name=".firebase.FamilyCareMessagingService"
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <!-- ============ TRACKING SERVICE ============ -->
         <service
-            android:name=".firebase.MyFirebaseInstanceIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-            </intent-filter>
-        </service>
+            android:name=".service.TrackingService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
 
-        //----------------------------------------------------------------------
-        <service android:name=".ServicesControl.CollegeJobService" />
-        <service android:name=".Chat.ChatService" />
+        <!-- ============ CHAT SERVICE ============ -->
+        <service
+            android:name=".service.ChatService"
+            android:exported="false" />
 
-        <receiver android:name=".ServicesControl.RestartServiceReceiver">
+        <!-- ============ RESTART ON KILL ============ -->
+        <receiver
+            android:name=".service.RestartServiceReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="StartKilledService" />
             </intent-filter>
         </receiver>
-        //-----------------------------------------------------------
+
+        <!-- ============ AUTO-RESTART ON BOOT ============ -->
+        <receiver
+            android:name=".service.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+        <!-- ============ GOOGLE MAPS ============ -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCuHSjKwAS6_uQKzvyc3T9QgxhBxC7qybk" />
+            android:value="${MAPS_API_KEY}" />
 
-        <activity
-            android:name=".activity.VerifyPin"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="e22e8c3cb0292d817530da053a59bffdadb7aaa4" />
-
-        <activity android:name=".Shopping.ScanActivity"
-            android:label="Scan Now"/>
-
-        <activity android:name=".Shopping.InWeb.ShopInWeb_Ac"></activity>
-        <activity android:name=".activity.TermAndConditionsAc"></activity>
-        <activity android:name=".Profile.ViewImage_Ac"></activity>
     </application>
 
 </manifest>

@@ -3,10 +3,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ScrollView
+        android:id="@+id/svContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include layout="@layout/news_events_item"/>
-    </ScrollView>
 
+        <include
+            android:id="@+id/newsEventsItem"
+            layout="@layout/news_events_item" />
+    </ScrollView>
 </LinearLayout>

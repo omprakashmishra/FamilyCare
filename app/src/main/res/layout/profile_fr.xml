@@ -158,7 +158,7 @@
 
                     </RelativeLayout>
 
-                    <include layout="@layout/view" />
+                    <include layout="@layout/divider_view" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -191,7 +191,7 @@ android:inputType="textEmailAddress"
 
                     </RelativeLayout>
 
-                    <include layout="@layout/view" />
+                    <include layout="@layout/divider_view" />
 
 
                     <RelativeLayout
@@ -227,7 +227,7 @@ android:inputType="textEmailAddress"
 
                     </RelativeLayout>
 
-                    <include layout="@layout/view" />
+                    <include layout="@layout/divider_view" />
 
 
                     <RelativeLayout

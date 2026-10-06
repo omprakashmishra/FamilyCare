@@ -54,7 +54,7 @@
 
         <view xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/body"
-            class="com.omsworld.familycare.setting.LineEditText"
+            class="com.omsworld.familycare.ui.widget.LineEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/toplayout"

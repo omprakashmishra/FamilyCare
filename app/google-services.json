@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "637264740269",
+    "firebase_url": "https://family-care-65f01.firebaseio.com",
+    "project_id": "family-care-65f01",
+    "storage_bucket": "family-care-65f01.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637264740269:android:ae0f1436118e97ab",
+        "android_client_info": {
+          "package_name": "com.omsworld.familycare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637264740269-o1kmkfrietm1d28qav6e9msnu744jhsm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.omsworld.familycare",
+            "certificate_hash": "060af6a84126603b0ee00b256af6b9cb8cfcd4f6"
+          }
+        },
+        {
+          "client_id": "637264740269-tf7v0u452igtsqll4hkoccnprabom41c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.omsworld.familycare",
+            "certificate_hash": "f94bdf70a03cb91172899038300cbf8da060cc41"
+          }
+        },
+        {
+          "client_id": "637264740269-jjvuljm9j2is5ikld539gn91tq7k5bst.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1F84C0saf1m1suF8pzmfm3i9j0txZEZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637264740269-jjvuljm9j2is5ikld539gn91tq7k5bst.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

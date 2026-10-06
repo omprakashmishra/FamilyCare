@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dd6249ae-ed91-4636-917e-4a87af8972f1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/google-services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/androidTest/java/com/omsworld/familycare/ExampleInstrumentedTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Chat/ChatAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Chat/ChatModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Chat/ChatService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Chat/Chat_Fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Chat/FriendListModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Chat/FriendsList_Adapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Chat/FriendsList_fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/ClickListener/RecyclerItemClickListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Diary/DiaryModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Diary/Diary_Fr_Adapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Diary/Diary_fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Diary/EditDiary_fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Profile/ViewImage_Ac.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/ServicesControl/CallWebForService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/ServicesControl/CollegeJobService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/ServicesControl/RestartServiceReceiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/SharedContacts/Fullsrc.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/SharedContacts/SearchAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/SharedContacts/SearchModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/SharedContacts/Sharedcontacts_fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/AddedItemModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/GroceryListModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/GroceryList_Adapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/GroceryList_Fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/InWeb/HeadCategoryAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/InWeb/ShopInWeb_Ac.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/InWeb/ShoppingModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/InWeb/ShoppingSitesAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/InWeb/ShoppingSitesList_Fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/ScanActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/ShoppedHistory_Adapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/ShoppedHistory_Fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/Shopping/ShoppingMain_Ac.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/activity/Gps_alert.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/activity/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/activity/NotificationActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/activity/Payment_ConfermationAc.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/activity/SignInUpActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/activity/SignUpActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/activity/SplashActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/activity/SplashActivity_Two.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/activity/TermAndConditionsAc.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/activity/TrackGPS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/activity/VerifyPin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/adapter/CountryCodeAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/adapter/FriendsTrackingAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/adapter/JoinSafeJoinAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/adapter/MyFriendAdapterList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/adapter/NewsEventsAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/adapter/SentFriendAdapterList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/adapter/WhoIsTrackingMeAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/AddressFromLatLong.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/AppUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/CallWebService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/CommonFunctions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/Controller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/CurrencyFormatter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/DateTime_c.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/FieldUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/GlobalConstants.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/MyApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/MyPlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/MyServiceListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/MySharedPereference.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/api_call/UrlList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/firebase/MyFirebaseInstanceIDService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/firebase/MyFirebaseMessagingService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/firebase/Notification.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/Emergency_Fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/FamilyMembers_Fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/Fragment_Package.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/Fragment_aboutus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/Fragment_contactus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/Fragment_settings.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/Home_fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/MapScrollableFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/MyTrackingFr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/NewsDetail_Fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/NewsEvents_Fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/Profile_Fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/Scan_fr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/fragment/SelectPakageFr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/CountryCodeModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/EmergencyContactFriendModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/EmergencyContactMeModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/FriendsMarkerData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/FriendsTrackingModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/Guard_list_model.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/JoinSafeJoinModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/NewsEventsModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/PackageModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/SOSbyFriendModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/SOSbyMeModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/ShoppedHistory_Model.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/UserSOS_HelpModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/model/WhoIsTrackingMeModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/setting/BaseActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/setting/ConnectionDetector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/omsworld/familycare/setting/LineEditText.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_sign_up.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_signin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_signin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/app_bar_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/app_bar_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/bottom_tab.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/bottom_tab.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/chat_list_user_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/chat_list_user_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/comment_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/comment_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/custom_edit_textview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/custom_edit_textview.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/diary_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/diary_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/edit_diary_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/edit_diary_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/family_member_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/family_member_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/filter.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/filter.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/forgetpassword_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/forgetpassword_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/grocery_list_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/grocery_list_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/invetation_activity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/invetation_activity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/joinsafezoneiteme_listview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/joinsafezoneiteme_listview.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/my_tracking_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/my_tracking_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/myfriends_itemlistview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/myfriends_itemlistview.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/news_detail_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/news_detail_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/news_events_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/news_events_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/note_edit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/note_edit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/notification_alert.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/notification_alert.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/profile_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/profile_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/reset_password_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/reset_password_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/scan_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/scan_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/search_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/search_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/shared_contacts_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/shared_contacts_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/shop_in_web_ac.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/shop_in_web_ac.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/shoping_sites_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/shoping_sites_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/shopped_history_fr.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/shopped_history_fr.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/user_info_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/user_info_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/view.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/view_image_ac.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/view_image_ac.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/welcom_ac.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/welcom_ac.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/menu/menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/menu/menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/omsworld/familycare/ExampleUnitTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../gradle/libs.versions.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../settings.gradle.kts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/Users/CES/StudioProjects/FamilyCare/app" value="3KJqAhw58t15usHwwqqv6PtXtbp" />
+    </persistenceIdMap>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "omprakashmishra"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/omprakashmishra/FamilyCare.git",
+    "accountId": "c58728d3-50ea-48d4-8660-afec36545b99"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="3KJqAhw58t15usHwwqqv6PtXtbp" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "android.gradle.sync.needed": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dd6249ae-ed91-4636-917e-4a87af8972f1" name="Changes" comment="" />
+      <created>1791285876556</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1791285876556</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

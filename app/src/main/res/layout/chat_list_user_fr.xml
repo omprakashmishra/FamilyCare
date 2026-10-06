@@ -1,15 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     android:orientation="vertical">
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         >
+        android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="fill_parent"
@@ -30,10 +29,10 @@
                 android:layout_height="35dp"
                 android:padding="5dp"
                 android:src="@drawable/ic_search"
-                android:tint="@color/white"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                app:tint="@color/white" />
 
             <EditText
                 android:id="@+id/TV_search"
@@ -60,10 +59,10 @@
                 android:padding="5dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/sorting_ic"
-                android:tint="@color/white"
                 android:layout_alignTop="@+id/TV_search"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                app:tint="@color/white" />
 
 
 
@@ -77,7 +76,7 @@
             android:layout_centerInParent="true"
             android:indeterminateDrawable="@drawable/circular_progressbar"
             android:visibility="visible"></ProgressBar>
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RV_Friends"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

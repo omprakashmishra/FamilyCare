@@ -121,7 +121,7 @@
             />
 
         <ImageView
-            android:id="@+id/IV_call"
+            android:id="@+id/IVCall"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:padding="5dp"

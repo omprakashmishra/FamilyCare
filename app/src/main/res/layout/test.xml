@@ -69,7 +69,7 @@
         android:orientation="vertical"
         android:paddingBottom="35dp">
 
-        <include layout="@layout/view" />
+        <include layout="@layout/divider_view" />
 
 
         <LinearLayout
@@ -110,7 +110,7 @@
 
         </LinearLayout>
 
-        <include layout="@layout/view" />
+        <include layout="@layout/divider_view" />
 
         <RelativeLayout
             android:layout_width="match_parent"

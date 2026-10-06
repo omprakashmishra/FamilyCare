@@ -9,7 +9,7 @@
     android:paddingTop="2dp">
 
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
@@ -76,13 +76,13 @@
 
                 </RelativeLayout>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RV_groceryList"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     >
 
-                </android.support.v7.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
 
 
 
@@ -206,10 +206,9 @@
 
                     <view xmlns:android="http://schemas.android.com/apk/res/android"
                         android:id="@+id/body"
-                        class="com.omsworld.familycare.setting.LineEditText"
+                        class="com.omsworld.familycare.ui.widget.LineEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_below="@+id/toplayout"
                         android:layout_marginRight="40dp"
                         android:autoLink="web"
                         android:background="@android:color/transparent"
@@ -237,7 +236,7 @@
             </LinearLayout>
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <ImageView
         android:id="@+id/IV_share_item"

@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <view xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <com.omsworld.familycare.ui.widget.LineEditText
         android:id="@+id/view_custom"
-        class="com.omsworld.familycare.setting.LineEditText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_5dp"
         android:autoLink="web"
         android:background="@android:color/transparent"
         android:capitalize="sentences"
@@ -14,7 +15,6 @@
         android:gravity="top"
         android:hint="Item name"
         android:overScrollMode="always"
-        android:layout_marginTop="@dimen/margin_5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:scrollbarStyle="insideInset"

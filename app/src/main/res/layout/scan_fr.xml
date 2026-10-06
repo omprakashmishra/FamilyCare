@@ -51,7 +51,7 @@
             android:textColorLink="@color/black"
             android:textSize="@dimen/head" />
 
-        <include layout="@layout/view" />
+        <include layout="@layout/divider_view" />
 
         <EditText
             android:id="@+id/ET_extraComment"

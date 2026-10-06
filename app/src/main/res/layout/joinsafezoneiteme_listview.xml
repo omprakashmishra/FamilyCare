@@ -44,7 +44,7 @@
 
 
         <TextView
-            android:id="@+id/Nameid"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_10dp"
@@ -58,7 +58,7 @@
             android:id="@+id/TV_Email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Nameid"
+            android:layout_below="@+id/tvName"
             android:layout_marginLeft="@dimen/margin_10dp"
             android:layout_marginTop="@dimen/margin_2dp"
             android:singleLine="true"
@@ -67,7 +67,7 @@
             android:textSize="@dimen/text_size_11sp" />
 
         <TextView
-            android:id="@+id/TV_Phone"
+            android:id="@+id/tvPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/TV_Email"

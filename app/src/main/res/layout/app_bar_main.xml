@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar12"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -20,16 +20,12 @@
             android:layout_marginRight="12dp"
             android:src="@drawable/notification"
             android:tint="@color/white" />
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:pixlui="http://schemas.android.com/apk/com.neopixl.pixlui"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        tools:context="com.webmazix.shmooops.Home">
+        android:fitsSystemWindows="true">
 
         <LinearLayout
             android:id="@+id/content"
@@ -42,10 +38,11 @@
                 android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
         </LinearLayout>
 
-        <include layout="@layout/bottom_tab"/>
+        <include
+            android:id="@+id/bottomDrawer"
+            layout="@layout/bottom_tab" />
     </RelativeLayout>
 
 </LinearLayout>

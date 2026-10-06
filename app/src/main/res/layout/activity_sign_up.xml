@@ -299,7 +299,7 @@ android:background="@drawable/rounded_border"
                 android:visibility="visible"/>
 
             <TextView
-                android:id="@+id/TV_termsconditions"
+                android:id="@+id/tvTermsconditions"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/btn_subscribe"
