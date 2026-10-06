@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Allow HTTP for your legacy API hosts -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">familycares.in</domain>
+        <domain includeSubdomains="true">webapihoc.co.in</domain>
+        <domain includeSubdomains="true">108.170.54.215</domain>
+    </domain-config>
+
+    <!-- Everything else stays HTTPS-only (recommended) -->
+    <base-config cleartextTrafficPermitted="false" />
+</network-security-config>
