@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="35dp"
-    android:layout_marginRight="7dp"
+    android:layout_marginStart="35dp"
+    android:layout_marginEnd="7dp"
     android:layout_marginTop="37dp"
     android:background="@color/transparent"
     android:minHeight="200dp"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <!-- Arrow indicator -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:background="@color/transparent">
@@ -19,50 +20,54 @@
             android:id="@+id/imageView3"
             android:layout_width="30dp"
             android:layout_height="20dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="6dp"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="11dp"
             android:paddingTop="8dp"
             android:src="@drawable/arrowup_white"
-            android:tint="@color/Red_color" />
-    </RelativeLayout>
+            app:tint="@color/Red_color" />
+    </FrameLayout>
 
-    <RelativeLayout
+    <!-- Header -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/Red_color">
+        android:background="@color/Red_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="7dp">
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
             android:text="Notification"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="7dp"
-            android:tint="@color/white"
-            app:srcCompat="@drawable/ic_setting" />
-    </RelativeLayout>
+            app:srcCompat="@drawable/ic_setting"
+            android:layout_marginEnd="5dp"
+            app:tint="@color/white" />
+    </LinearLayout>
 
-    <LinearLayout
+    <!-- Content -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:background="@color/white" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp" />
+    </FrameLayout>
 </LinearLayout>

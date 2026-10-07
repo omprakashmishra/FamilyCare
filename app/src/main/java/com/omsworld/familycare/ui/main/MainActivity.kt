@@ -334,12 +334,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         dialog.setContentView(dialogBinding.root)
         dialog.setCancelable(true)
 
+        val topMarginPx = (35 * resources.displayMetrics.density).toInt()
+
         dialog.window?.apply {
             setLayout(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT
             )
             setGravity(Gravity.TOP or Gravity.END)
+
+            val params = attributes
+            params.y = topMarginPx  // offset from top of the screen
+            attributes = params
         }
 
         dialog.show()
