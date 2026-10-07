@@ -114,25 +114,28 @@ class FamilyRepository @Inject constructor(
     // FAMILY REQUEST ACTION (family_request_action.php)
     // ============================================================
     suspend fun familyRequestAction(
-        userId: String,
-        familyId: String,
+        requestId: Long,
         action: String
     ): ApiResult<Unit> = safeApiCall {
         val updates = when (action) {
-            "1" -> mapOf("is_accepted" to "1")     // accept
-            "2" -> mapOf("is_declined" to "1")     // decline
-            else -> emptyMap()
-        }
-        if (updates.isEmpty()) {
-            throw IllegalStateException("Invalid action: $action")
+            "1" -> mapOf("is_accepted" to "1")
+            "2" -> mapOf("is_declined" to "1")
+            else -> throw IllegalStateException("Invalid action: $action")
         }
 
         val response = supabase.updateFamilyRequest(
-            idEq = "eq.$familyId",
+            idEq = "eq.$requestId",
             updates = updates
         )
         if (!response.isSuccessful) {
             throw IllegalStateException("Request action failed: ${response.code()}")
+        }
+    }
+
+    suspend fun cancelFamilyRequest(requestId: Long): ApiResult<Unit> = safeApiCall {
+        val response = supabase.deleteFamilyRequest(idEq = "eq.$requestId")
+        if (!response.isSuccessful) {
+            throw IllegalStateException("Cancel request failed: ${response.code()}")
         }
     }
 

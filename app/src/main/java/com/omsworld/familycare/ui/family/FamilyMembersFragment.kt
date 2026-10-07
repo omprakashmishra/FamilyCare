@@ -76,17 +76,33 @@ class FamilyMembersFragment : BaseFragment<FamilyMemberFrBinding>() {
         collectState(vm.state) { state ->
             binding.swipeRefreshLayout.isRefreshing = false
             when (state) {
-                is FamilyUiState.Loading -> binding.mprogressBar.visibility = View.VISIBLE
+                is FamilyUiState.Loading -> {
+                    binding.mprogressBar.visibility = View.VISIBLE
+                }
                 is FamilyUiState.Success -> {
                     binding.mprogressBar.visibility = View.GONE
-                    binding.TVFamilyName.text = state.familyName.ifBlank { "My Family" }
+
+                    // Show family name
+                    binding.TVFamilyName.text = state.familyName.ifBlank { "No Family" }
+
+                    // Show/hide bottom buttons based on admin status
                     binding.LLBottom.visibility = if (state.isAdmin) View.VISIBLE else View.GONE
+                    binding.IVEditGroup.visibility = if (state.isAdmin) View.VISIBLE else View.GONE
+
+                    // Submit members
                     adapter.submitList(state.members)
+
+                    // If no family exists, prompt user to create one
+                    if (state.familyId.isBlank()) {
+                        binding.TVFamilyName.text = "Tap to create family →"
+                        binding.IVEditGroup.visibility = View.VISIBLE
+                    }
                 }
                 is FamilyUiState.Error -> {
                     binding.mprogressBar.visibility = View.GONE
                     snack(state.message)
                 }
+                else -> Unit
             }
         }
     }
@@ -119,14 +135,24 @@ class FamilyMembersFragment : BaseFragment<FamilyMemberFrBinding>() {
 
     private fun showEditFamilyDialog() {
         val input = EditText(requireContext()).apply {
-            hint = "Family name"
-            setText(prefs.getString(requireContext(), Constants.FAMILY_NAME, "0"))
+            hint = "Enter family name"
+            setText(prefs.getString(requireContext(), Constants.FAMILY_NAME))
+            setPadding(40, 30, 40, 30)
         }
+
+        val currentFamily = prefs.getString(requireContext(), Constants.FAMILY_NAME)
+        val title = if (currentFamily.isBlank()) "Create Family" else "Update Family Name"
+
         AlertDialog.Builder(requireContext())
-            .setTitle("Update Your Family")
+            .setTitle(title)
             .setView(input)
             .setPositiveButton("Save") { _, _ ->
-                // TODO: call create/update family API
+                val name = input.text.toString().trim()
+                if (name.isBlank()) {
+                    toast("Please enter a family name")
+                    return@setPositiveButton
+                }
+                vm.createOrUpdateFamily(name)
             }
             .setNegativeButton("Cancel", null)
             .show()

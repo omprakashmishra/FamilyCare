@@ -217,4 +217,10 @@ interface SupabaseApiService {
     // ==================== SUGGESTIONS ====================
     @POST("rest/v1/user_suggestions")
     suspend fun submitSuggestion(@Body suggestion: SupabaseSuggestionDto): Response<Unit>
+
+    @DELETE("rest/v1/family_requests")
+    suspend fun deleteFamilyRequest(
+        @Query("id") idEq: String
+    ): Response<Unit>
+
 }
