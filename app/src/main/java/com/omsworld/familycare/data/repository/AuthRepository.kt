@@ -2,70 +2,75 @@ package com.omsworld.familycare.data.repository
 
 import com.omsworld.familycare.FamilyCareApp
 import com.omsworld.familycare.core.Constants
-import com.omsworld.familycare.core.UrlList
 import com.omsworld.familycare.core.result.ApiResult
 import com.omsworld.familycare.core.result.safeApiCall
 import com.omsworld.familycare.data.local.MySharedPreference
-import com.omsworld.familycare.data.remote.ApiService
+import com.omsworld.familycare.data.remote.SupabaseApiService
 import com.omsworld.familycare.data.remote.dto.LoginResponse
+import com.omsworld.familycare.data.remote.dto.SupabaseUserDto
 import org.json.JSONObject
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
 class AuthRepository @Inject constructor(
-    private val api: ApiService,
+    @Named("supabase") private val supabase: SupabaseApiService,
     private val prefs: MySharedPreference
 ) {
 
-    // ==================== Login ====================
-    suspend fun login(email: String, password: String): ApiResult<LoginResponse> =
+    suspend fun loginByMobile(mobile: String, password: String): ApiResult<SupabaseUserDto> =
         safeApiCall {
-            api.login(mapOf("email" to email, "password" to password))
-                .body() ?: throw IllegalStateException("Empty response")
+            val users = supabase.getUserByMobile(mobileEq = "eq.$mobile")
+            val user = users.firstOrNull()
+                ?: throw IllegalStateException("User not found")
+
+            if (user.password != password) {
+                throw IllegalStateException("Invalid credentials")
+            }
+
+            saveSession(user)
+            user
         }
 
-    // ==================== OTP Verify ====================
-    suspend fun verifyOtp(mobile: String, otp: String): ApiResult<LoginResponse> =
-        safeApiCall {
-            api.verifyOtp(mapOf("user_mob" to mobile, "otp" to otp))
-                .body() ?: throw IllegalStateException("Empty response")
-        }
-
-    // ==================== Register ====================
     suspend fun register(
+        userId: String,
         userName: String,
         email: String,
-        mobileNo: String,
+        mobile: String,
         password: String
-    ): ApiResult<LoginResponse> = safeApiCall {
-        api.register(
-            mapOf(
-                "UserName" to userName,
-                "Email" to email,
-                "MobileNo" to mobileNo,
-                "Password" to password
-            )
-        ).body() ?: throw IllegalStateException("Empty response")
+    ): ApiResult<Unit> = safeApiCall {
+        val newUser = SupabaseUserDto(
+            aspnetUserId = userId,
+            email = email.ifBlank { null },
+            mobileNo = mobile,
+            userName = userName,
+            password = password,
+            inviteeStatusId = "1080"
+        )
+        val response = supabase.insertUser(newUser)
+        if (!response.isSuccessful) {
+            throw IllegalStateException("Registration failed: ${response.code()}")
+        }
     }
 
-    // ==================== Generic POST ====================
-    suspend fun postRaw(url: String, params: Map<String, String>): ApiResult<String> =
-        safeApiCall { api.post(url, params).body() ?: "" }
+    fun saveSession(user: SupabaseUserDto) {
+        val ctx = FamilyCareApp.appContext
+        prefs.setString(ctx, Constants.USER_ID, user.aspnetUserId ?: "")
+        prefs.setString(ctx, Constants.USER_NAME, user.userName ?: "")
+        prefs.setString(ctx, Constants.MOBILE_only, user.mobileNo ?: "")
+        prefs.setString(ctx, Constants.EMAIL, user.email ?: "")
+        prefs.setString(ctx, Constants.USER_IMAGE, user.userImg ?: "")
+        prefs.setString(ctx, Constants.FAMILY_ID, user.familyId ?: "")
+        prefs.setString(ctx, Constants.FAMILY_NAME, user.familyName ?: "")
+        prefs.setString(
+            ctx,
+            Constants.IsFamilyAdmin,
+            if (user.isFamilyAdmin == true) "1" else "0"
+        )
+        prefs.setString(ctx, Constants.LOGIN_STATUS, "1")
+    }
 
-    // ==================== Forgot Password ====================
-    suspend fun sendForgotPassword(mobile: String): ApiResult<String> =
-        safeApiCall {
-            api.post(UrlList.forgot_pass, mapOf("mobile" to mobile)).body() ?: ""
-        }
-
-    // ==================== Resend OTP ====================
-    suspend fun resendOtp(mobile: String): ApiResult<String> =
-        safeApiCall {
-            api.post(UrlList.resend_otp, mapOf("user_mob" to mobile)).body() ?: ""
-        }
-
-    // ==================== Save Session (typed DTO) ====================
     fun saveSession(res: LoginResponse) {
         val ctx = FamilyCareApp.appContext
         res.userInfo?.let { u ->
@@ -81,11 +86,32 @@ class AuthRepository @Inject constructor(
         prefs.setString(ctx, Constants.LOGIN_STATUS, "1")
     }
 
-    // ==================== ⬇️ THIS IS THE NEW METHOD ⬇️ ====================
-    /**
-     * Save user info from a raw JSON response.
-     * Used by SignInUpViewModel when the API returns `user_info` as JSONObject.
-     */
+    fun isLoggedIn(): Boolean =
+        prefs.getString(FamilyCareApp.appContext, Constants.LOGIN_STATUS) == "1"
+
+    fun logout() {
+        val ctx = FamilyCareApp.appContext
+        val firebaseToken = prefs.getString(ctx, Constants.Firebasetoken)
+        prefs.clearSharedPreference(ctx)
+        prefs.setString(ctx, Constants.Firebasetoken, firebaseToken)
+        prefs.setString(ctx, Constants.LOGIN_STATUS, "0")
+    }
+
+    suspend fun verifyOtp(mobile: String, otp: String): ApiResult<LoginResponse> =
+        ApiResult.Error("OTP verification is being migrated. Please try again later.")
+
+    suspend fun postRaw(url: String, params: Map<String, String>): ApiResult<String> =
+        ApiResult.Error("This feature is being migrated. Please try again later.")
+
+    suspend fun sendForgotPassword(mobile: String): ApiResult<String> =
+        ApiResult.Error("Forgot password is being migrated. Please try again later.")
+
+    suspend fun resendOtp(mobile: String): ApiResult<String> =
+        ApiResult.Error("Resend OTP is being migrated. Please try again later.")
+
+    suspend fun login(email: String, password: String): ApiResult<LoginResponse> =
+        ApiResult.Error("Legacy login is disabled. Use Supabase login.")
+
     fun persistUserInfo(userInfo: JSONObject) {
         val ctx = FamilyCareApp.appContext
         prefs.setString(ctx, Constants.USER_ID, userInfo.optString("user_id"))
@@ -97,21 +123,5 @@ class AuthRepository @Inject constructor(
         prefs.setString(ctx, Constants.FAMILY_NAME, userInfo.optString("family_name"))
         prefs.setString(ctx, Constants.IsFamilyAdmin, userInfo.optString("isFamilyAdmin", "0"))
         prefs.setString(ctx, Constants.LOGIN_STATUS, "1")
-    }
-    // ==================== ⬆️ END NEW METHOD ⬆️ ====================
-
-    // ==================== Session Status ====================
-    fun isLoggedIn(): Boolean =
-        prefs.getString(FamilyCareApp.appContext, Constants.LOGIN_STATUS, "0") == "1"
-
-    // ==================== Logout ====================
-    fun logout() {
-        val ctx = FamilyCareApp.appContext
-        val firebaseToken = prefs.getString(ctx, Constants.Firebasetoken, "0")
-        prefs.clearSharedPreference(ctx)
-        prefs.setString(ctx, Constants.Firebasetoken, firebaseToken)
-        prefs.setString(ctx, Constants.LOGIN_STATUS, "0")
-        prefs.setString(ctx, Constants.NOTIFICATION, "0")
-        prefs.setString(ctx, Constants.LEGALAGREEMENTCHECK, "1")
     }
 }

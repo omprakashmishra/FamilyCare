@@ -33,42 +33,39 @@ class NewsEventsViewModel @Inject constructor(
 
     fun loadNews() = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         if (userId.isBlank()) {
             setState(NewsUiState.Error("Not logged in"))
             return@launch
         }
         setState(NewsUiState.Loading)
+
         repo.getNewsList(userId)
-            .onSuccess { root ->
-                val list = mutableListOf<NewsEventsModel>()
-                val arr = root.optJSONArray("news_list")
-                if (arr != null) {
-                    for (i in 0 until arr.length()) {
-                        val o = arr.optJSONObject(i) ?: continue
-                        list.add(
+            .onSuccess { items ->
+                setState(
+                    NewsUiState.Success(
+                        items.map {
                             NewsEventsModel(
-                                id = o.optString("id"),
-                                title = o.optString("title"),
-                                discription = o.optString("discription"),
-                                category = o.optString("category"),
-                                added_date = o.optString("added_date"),
-                                news_type = o.optString("type"),
-                                like_count = o.optString("like_count"),
-                                like = o.optString("like"),
-                                image = o.optString("image")
+                                id = it.id,
+                                title = it.title,
+                                discription = it.discription,
+                                category = it.category,
+                                added_date = it.addedDate,
+                                news_type = it.newsType,
+                                like_count = it.likeCount,
+                                like = it.like,
+                                image = it.image
                             )
-                        )
-                    }
-                }
-                setState(NewsUiState.Success(list))
+                        }
+                    )
+                )
             }
             .onError { msg, _ -> setState(NewsUiState.Error(msg)) }
     }
 
     fun toggleLike(item: NewsEventsModel) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         val isLiked = item.like == "1"
         val result = if (isLiked) repo.unlikeNews(userId, item.id)
         else repo.likeNews(userId, item.id)

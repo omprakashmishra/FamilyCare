@@ -24,23 +24,34 @@ android {
         vectorDrawables { useSupportLibrary = true }
         multiDexEnabled = true
 
-        // Read Maps API key from local.properties
+        // ===== Read secrets from local.properties =====
         val localProps = Properties()
         val localFile = rootProject.file("local.properties")
         if (localFile.exists()) {
             localProps.load(localFile.inputStream())
         }
+
+        // Maps API key (for AndroidManifest placeholder)
         manifestPlaceholders["MAPS_API_KEY"] =
             localProps.getProperty("MAPS_API_KEY") ?: ""
 
-        buildConfigField("String", "BASE_URL", "\"http://familycares.in/family-care/Api/\"")
+        // ===== Supabase config =====
+        buildConfigField(
+            "String",
+            "SUPABASE_URL",
+            "\"${localProps.getProperty("SUPABASE_URL") ?: ""}\""
+        )
+        buildConfigField(
+            "String",
+            "SUPABASE_ANON_KEY",
+            "\"${localProps.getProperty("SUPABASE_ANON_KEY") ?: ""}\""
+        )
     }
 
     buildTypes {
         debug {
             isMinifyEnabled = false
             isDebuggable = true
-            buildConfigField("String", "BASE_URL", "\"http://familycares.in/family-care/Api/\"")
         }
         release {
             isMinifyEnabled = true
@@ -49,7 +60,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "BASE_URL", "\"http://familycares.in/family-care/Api/\"")
         }
     }
 
@@ -92,19 +102,16 @@ android {
 }
 
 dependencies {
-    // ===== Core =====
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.multidex)
 
-    // ===== Lifecycle / MVVM =====
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
-    // ===== UI =====
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.recyclerview)
@@ -113,12 +120,10 @@ dependencies {
     implementation(libs.androidx.drawerlayout)
     implementation(libs.androidx.viewpager2)
 
-    // ===== Hilt =====
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.fragment)
 
-    // ===== Networking =====
     implementation(libs.retrofit)
     implementation(libs.retrofit.moshi)
     implementation(libs.okhttp)
@@ -127,34 +132,27 @@ dependencies {
     implementation(libs.moshi.kotlin)
     ksp(libs.moshi.kotlin.codegen)
 
-    // ===== Coroutines =====
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.play.services)
 
-    // ===== Images =====
     implementation(libs.coil)
     implementation(libs.circleimageview)
 
-    // ===== Play Services =====
     implementation(libs.play.services.location)
     implementation(libs.play.services.maps)
 
-    // ===== Firebase =====
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.crashlytics)
 
-    // ===== Logging =====
     implementation(libs.timber)
 
-    // ===== Legacy third-party =====
     implementation(libs.slidinguppanel)
     implementation(libs.zxing.android.embedded)
     implementation(libs.ccp)
     implementation(libs.circleindicator)
 
-    // ===== Testing =====
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

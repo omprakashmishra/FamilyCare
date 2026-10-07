@@ -33,37 +33,31 @@ class DiaryViewModel @Inject constructor(
 
     fun loadDiary() = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         if (userId.isBlank()) {
             setState(DiaryUiState.Error("Not logged in"))
             return@launch
         }
         setState(DiaryUiState.Loading)
+
         repo.getDiaryList(userId)
-            .onSuccess { root ->
-                val list = mutableListOf<DiaryModel>()
-                val arr = root.optJSONArray("my_diary")
-                if (arr != null) {
-                    for (i in 0 until arr.length()) {
-                        val o = arr.optJSONObject(i) ?: continue
-                        list.add(
-                            DiaryModel(
-                                id = o.optString("id"),
-                                note = o.optString("note"),
-                                subject = o.optString("subject"),
-                                added_date = o.optString("added_date")
-                            )
-                        )
-                    }
+            .onSuccess { items ->
+                val entries = items.map {
+                    DiaryModel(
+                        id = it.id?.toString() ?: "",
+                        note = it.note ?: "",
+                        subject = it.subject ?: "",
+                        added_date = it.addedDate ?: ""
+                    )
                 }
-                setState(DiaryUiState.Success(list))
+                setState(DiaryUiState.Success(entries))
             }
             .onError { msg, _ -> setState(DiaryUiState.Error(msg)) }
     }
 
     fun deleteDiary(id: String) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         repo.deleteDiary(userId, id)
             .onSuccess {
                 showMessage("Note deleted")

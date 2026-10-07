@@ -91,7 +91,7 @@
             </intent-filter>
         </activity>
 
-        <!-- Legacy splash (non-launcher) -->
+        <!-- Legacy splash -->
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="false"
@@ -124,6 +124,13 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
+        <!-- ============ CHAT ============ -->
+        <activity
+            android:name=".ui.chat.ChatActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <!-- ============ PAYMENT ============ -->
         <activity
@@ -216,5 +223,4 @@
             android:value="${MAPS_API_KEY}" />
 
     </application>
-
 </manifest>

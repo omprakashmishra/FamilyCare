@@ -58,4 +58,10 @@
     <color name="BlueDark">#252F62</color>
     <color name="LightGray">#F1F1F1</color>
     <color name="tab_color">#e7e7e7</color>
+
+    <!-- ==================== Chat Bubbles ==================== -->
+    <color name="chat_bubble_sent">#7C3AED</color>
+    <color name="chat_bubble_sent_text">#FFFFFF</color>
+    <color name="chat_bubble_received">#FFFFFF</color>
+    <color name="chat_bubble_received_text">#1A1F3A</color>
 </resources>

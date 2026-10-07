@@ -2,13 +2,12 @@ package com.omsworld.familycare.ui.auth
 
 import androidx.lifecycle.viewModelScope
 import com.omsworld.familycare.base.BaseViewModel
-import com.omsworld.familycare.core.UrlList
 import com.omsworld.familycare.core.result.onError
 import com.omsworld.familycare.core.result.onSuccess
 import com.omsworld.familycare.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import org.json.JSONObject
+import timber.log.Timber
 import javax.inject.Inject
 
 sealed interface SignInUiState {
@@ -28,6 +27,9 @@ class SignInUpViewModel @Inject constructor(
 
     fun isAlreadyLoggedIn(): Boolean = authRepo.isLoggedIn()
 
+    // ============================================================
+    // LOGIN — Supabase ONLY (no PHP fallback)
+    // ============================================================
     fun login(emailOrMobile: String, password: String) = viewModelScope.launch {
         if (emailOrMobile.isBlank()) {
             setState(SignInUiState.Error("Enter mobile number"))
@@ -35,41 +37,22 @@ class SignInUpViewModel @Inject constructor(
         }
         setState(SignInUiState.Loading)
 
-        authRepo.postRaw(
-            UrlList.LOG_IN,
-            mapOf("email" to emailOrMobile, "password" to password)
-        ).onSuccess { raw ->
-            try {
-                val obj = JSONObject(raw)
-                val status = obj.optString("status")
-                val message = obj.optString("message")
-
-                when (status) {
-                    "0" -> setState(SignInUiState.Error(message.ifBlank { "Login failed" }))
-                    "1" -> {
-                        val userInfo = obj.optJSONObject("user_info")
-                        if (userInfo != null) {
-                            authRepo.persistUserInfo(userInfo)
-                        }
-                        setState(SignInUiState.Success)
-                    }
-                    "2" -> {
-                        val mobile = obj.optString("mobile")
-                        setState(SignInUiState.NeedsOtp(mobile))
-                    }
-                    else -> setState(SignInUiState.Error(message.ifBlank { "Unknown response" }))
-                }
-            } catch (e: Exception) {
-                setState(SignInUiState.Error("Invalid response"))
+        authRepo.loginByMobile(emailOrMobile.trim(), password)
+            .onSuccess {
+                Timber.i("Login succeeded via Supabase")
+                setState(SignInUiState.Success)
             }
-        }.onError { msg, _ ->
-            setState(SignInUiState.Error(msg))
-        }
+            .onError { msg, _ ->
+                Timber.e("Login failed: $msg")
+                setState(SignInUiState.Error(msg))
+            }
     }
 
+    // ============================================================
+    // FORGOT PASSWORD — will be migrated to Supabase next
+    // ============================================================
     fun forgotPassword(mobile: String) = viewModelScope.launch {
-        authRepo.sendForgotPassword(mobile)
-            .onSuccess { showMessage("Please check your mobile") }
-            .onError { msg, _ -> showError(msg) }
+        // TODO: migrate to Supabase
+        setState(SignInUiState.Error("Forgot password is not yet enabled"))
     }
 }

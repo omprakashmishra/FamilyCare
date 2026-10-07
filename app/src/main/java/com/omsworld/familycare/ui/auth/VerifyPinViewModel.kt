@@ -2,13 +2,12 @@ package com.omsworld.familycare.ui.auth
 
 import androidx.lifecycle.viewModelScope
 import com.omsworld.familycare.base.BaseViewModel
-import com.omsworld.familycare.core.UrlList
 import com.omsworld.familycare.core.result.onError
 import com.omsworld.familycare.core.result.onSuccess
 import com.omsworld.familycare.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import org.json.JSONObject
+import timber.log.Timber
 import javax.inject.Inject
 
 sealed interface VerifyUiState {
@@ -25,32 +24,37 @@ class VerifyPinViewModel @Inject constructor(
 
     override val initialState: VerifyUiState = VerifyUiState.Idle
 
+    // ============================================================
+    // VERIFY OTP
+    // TODO: Migrate to Supabase Auth SMS OTP. For now, accept any 4-digit OTP
+    // and let the user log in with their mobile.
+    // ============================================================
     fun verify(mobile: String, otp: String) = viewModelScope.launch {
+        if (otp.length < 4) {
+            setState(VerifyUiState.Error("Enter a valid OTP"))
+            return@launch
+        }
+
         setState(VerifyUiState.Loading)
 
-        authRepo.verifyOtp(mobile, otp)
-            .onSuccess { res ->
-                if (res.status == "1" && res.userInfo != null) {
-                    authRepo.saveSession(res)
-                    setState(VerifyUiState.Success)
-                } else {
-                    setState(VerifyUiState.Error(res.message ?: "Invalid OTP"))
-                }
+        // ─── Temporary flow: look up user by mobile and log them in ───
+        // The real OTP check will come when we wire Supabase Auth.
+        authRepo.loginByMobile(mobile, password = otp)
+            .onSuccess {
+                setState(VerifyUiState.Success)
             }
             .onError { msg, _ ->
+                Timber.e("OTP login failed: $msg")
                 setState(VerifyUiState.Error(msg))
             }
     }
 
+    // ============================================================
+    // RESEND OTP
+    // TODO: Migrate to Supabase Auth SMS once available.
+    // ============================================================
     fun resend(mobile: String) = viewModelScope.launch {
-        authRepo.postRaw(UrlList.ResendOtp, mapOf("user_mob" to mobile))
-            .onSuccess {
-                try {
-                    val obj = JSONObject(it)
-                    val msg = obj.optString("message")
-                    if (msg.isNotBlank()) showMessage(msg)
-                } catch (_: Exception) { }
-            }
-            .onError { msg, _ -> showError(msg) }
+        // Supabase OTP resend not wired yet — show informational message.
+        showError("Resend OTP is being migrated. Please try again later.")
     }
 }

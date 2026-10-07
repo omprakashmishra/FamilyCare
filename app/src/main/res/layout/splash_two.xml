@@ -1,47 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/white">
+    android:id="@+id/splashRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_gradient">
 
-    <RelativeLayout
-        android:id="@+id/RL_top"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="#C42625"></RelativeLayout>
-
-    <ImageView
-        android:id="@+id/Iv_splash"
-        android:layout_width="219dp"
-        android:layout_height="219dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/logo" />
-
-
-    <RelativeLayout
-        android:id="@+id/RL_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+    <!-- Floating particles (background layer) -->
+    <View
+        android:id="@+id/particle1"
+        android:layout_width="4dp"
+        android:layout_height="4dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/white">
+        android:layout_marginStart="80dp"
+        android:background="@drawable/splash_orb"
+        android:alpha="0.5" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="-41dp"
-            android:fontFamily="cursive"
-            android:text="Family Care"
-            android:textColor="@color/dark_red"
-            android:textSize="30dp" />
+    <View
+        android:id="@+id/particle2"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/splash_orb"
+        android:alpha="0.4" />
 
+    <View
+        android:id="@+id/particle3"
+        android:layout_width="3dp"
+        android:layout_height="3dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/splash_orb"
+        android:alpha="0.6" />
+
+    <!-- Center: orb + rings -->
+    <RelativeLayout
+        android:id="@+id/RL_center"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_centerInParent="true">
+
+        <!-- Outer glow -->
+        <View
+            android:id="@+id/splashGlow"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/splash_glow"
+            android:alpha="0.7" />
+
+        <!-- Outer ring 1 -->
+        <View
+            android:id="@+id/splashRing1"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/splash_ring" />
+
+        <!-- Outer ring 2 -->
+        <View
+            android:id="@+id/splashRing2"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/splash_ring" />
+
+        <!-- Inner ring 3 -->
+        <View
+            android:id="@+id/splashRing3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/splash_ring" />
+
+        <!-- Center orb -->
+        <View
+            android:id="@+id/splashOrb"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/splash_orb"
+            android:elevation="8dp" />
+
+        <!-- App icon inside orb -->
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/BlueDark" />
-
+            android:id="@+id/splashLogo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_launcher"
+            android:elevation="10dp" />
     </RelativeLayout>
 
+    <!-- App name -->
+    <TextView
+        android:id="@+id/splashTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/RL_center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-light"
+        android:letterSpacing="0.35"
+        android:text="@string/app_name"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <!-- Tagline -->
+    <TextView
+        android:id="@+id/splashTagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/splashTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.15"
+        android:text="Stay Connected, Stay Safe"
+        android:textAllCaps="true"
+        android:textColor="#C7D2FE"
+        android:textSize="11sp" />
+
+    <!-- Bottom: loading dots -->
+    <LinearLayout
+        android:id="@+id/splashDots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="56dp"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/dot1"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="8dp"
+            android:alpha="0.4"
+            android:background="@drawable/splash_orb" />
+
+        <View
+            android:id="@+id/dot2"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="8dp"
+            android:alpha="0.7"
+            android:background="@drawable/splash_orb" />
+
+        <View
+            android:id="@+id/dot3"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:alpha="1.0"
+            android:background="@drawable/splash_orb" />
+    </LinearLayout>
+
+    <!-- Subtle version tag at bottom -->
+    <TextView
+        android:id="@+id/splashVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:text="v6.09"
+        android:textColor="#8899CCEE"
+        android:textSize="10sp" />
 
 </RelativeLayout>

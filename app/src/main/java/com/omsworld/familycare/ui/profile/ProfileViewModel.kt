@@ -34,7 +34,7 @@ class ProfileViewModel @Inject constructor(
         about: String
     ) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         setState(ProfileUiState.Saving)
 
         repo.updateProfile(userId, userName, email, dob, about)
@@ -50,15 +50,12 @@ class ProfileViewModel @Inject constructor(
 
     fun uploadImage(base64: String) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         setState(ProfileUiState.Saving)
 
         repo.uploadImage(userId, base64)
-            .onSuccess { root ->
-                val newUrl = root.optString("message")
-                if (newUrl.isNotBlank()) {
-                    prefs.setString(ctx, Constants.USER_IMAGE, newUrl)
-                }
+            .onSuccess { url ->
+                prefs.setString(ctx, Constants.USER_IMAGE, url)
                 setState(ProfileUiState.Saved)
             }
             .onError { msg, _ -> setState(ProfileUiState.Error(msg)) }
@@ -67,7 +64,7 @@ class ProfileViewModel @Inject constructor(
     fun changePassword(old: String, new: String, confirm: String) =
         viewModelScope.launch {
             val ctx = FamilyCareApp.appContext
-            val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+            val userId = prefs.getString(ctx, Constants.USER_ID)
             repo.changePassword(userId, old, new, confirm)
                 .onSuccess {
                     showMessage("Password changed")

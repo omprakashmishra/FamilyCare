@@ -16,8 +16,7 @@ class FamilyCareApp : Application() {
         instance = this
 
         // Crashlytics: only report in release
-        FirebaseCrashlytics.getInstance()
-            .setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
+        FirebaseCrashlytics.getInstance().isCrashlyticsCollectionEnabled = !BuildConfig.DEBUG
 
         // Logging: Timber in debug
         if (BuildConfig.DEBUG) {

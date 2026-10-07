@@ -52,6 +52,7 @@ class SelectPackageFragment : BaseFragment<SelectpakageFrBinding>() {
                 is PackageUiState.Loading -> Unit
                 is PackageUiState.Success -> renderPackages(state.packages)
                 is PackageUiState.Error -> snack(state.message)
+            else -> Unit
             }
         }
     }

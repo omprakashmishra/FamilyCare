@@ -34,48 +34,28 @@ class ShoppedHistoryViewModel @Inject constructor(
 
     fun load() = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         if (userId.isBlank()) {
             setState(ShoppedHistoryUiState.Error("Not logged in"))
             return@launch
         }
         setState(ShoppedHistoryUiState.Loading)
-        repo.getShoppedHistory(userId)
-            .onSuccess { root ->
-                val list = mutableListOf<ShoppedHistoryModel>()
-                var total = 0.0
-                val arr = root.optJSONArray("shopped_note")
-                if (arr != null) {
-                    for (i in 0 until arr.length()) {
-                        val day = arr.optJSONObject(i) ?: continue
-                        val sub = day.optJSONArray("added_item") ?: continue
-                        for (j in 0 until sub.length()) {
-                            val o = sub.optJSONObject(j) ?: continue
-                            val price = o.optString("price")
-                            total += price.toDoubleOrNull() ?: 0.0
 
-                            val itemsArr = o.optJSONArray("item")
-                            val itemName = buildString {
-                                if (itemsArr != null) {
-                                    for (k in 0 until itemsArr.length()) {
-                                        val it = itemsArr.optJSONObject(k) ?: continue
-                                        append("$k.  ${it.optString("item_name")}\n")
-                                    }
-                                }
-                            }
-                            list.add(
-                                ShoppedHistoryModel(
-                                    item_name = itemName,
-                                    item_count = (itemsArr?.length() ?: 0).toString(),
-                                    added_by_name = o.optString("added_by_name"),
-                                    added_date = o.optString("added_date"),
-                                    price = price
-                                )
-                            )
-                        }
-                    }
+        repo.getShoppedHistory(userId)
+            .onSuccess { items ->
+                var total = 0.0
+                val history = items.map {
+                    val price = it.price ?: "0"
+                    total += price.toDoubleOrNull() ?: 0.0
+                    ShoppedHistoryModel(
+                        item_name = it.note ?: "",
+                        item_count = "1",
+                        added_by_name = it.addedByName ?: "",
+                        added_date = it.addedDate ?: "",
+                        price = price
+                    )
                 }
-                setState(ShoppedHistoryUiState.Success(list, total))
+                setState(ShoppedHistoryUiState.Success(history, total))
             }
             .onError { msg, _ -> setState(ShoppedHistoryUiState.Error(msg)) }
     }

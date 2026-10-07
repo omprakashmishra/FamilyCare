@@ -1,5 +1,6 @@
 package com.omsworld.familycare.ui.shopping.web
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,15 +8,13 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.omsworld.familycare.R
-import com.omsworld.familycare.data.remote.dto.*
-import org.json.JSONArray
-import org.json.JSONObject
+import com.omsworld.familycare.data.remote.dto.SupabaseShoppingCategoryDto
 
 class HeadCategoryAdapter(
-    private val context: android.content.Context,
-    private val jsonArray: JSONArray,
+    private val context: Context,
+    private val categories: List<SupabaseShoppingCategoryDto>,
     private val layoutId: Int,
-    private val controller: (String) -> Unit
+    private val onCategoryClick: (String) -> Unit
 ) : RecyclerView.Adapter<HeadCategoryAdapter.VH>() {
 
     private var selectedId: String = ""
@@ -26,28 +25,33 @@ class HeadCategoryAdapter(
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val obj = jsonArray.optJSONObject(position) ?: return
-        val id = obj.optString("id")
-        val name = obj.optString("name")
+        val category = categories[position]
+        val id = category.id?.toString() ?: ""
+        val name = category.name ?: ""
 
         holder.itemName.text = name
         holder.itemName.setBackgroundResource(R.drawable.border)
         holder.itemName.setTextColor(context.resources.getColor(R.color.black, null))
 
+        // Auto-select first category on first render
         if (selectedId.isEmpty() || selectedId == id) {
             selectedId = id
             holder.itemName.setBackgroundResource(R.drawable.dark_blue_bg)
             holder.itemName.setTextColor(context.resources.getColor(R.color.white, null))
-            controller(id)
+            onCategoryClick(id)
         }
 
         holder.rlRow.setOnClickListener {
+            val oldSelected = selectedId
             selectedId = id
             notifyDataSetChanged()
+            if (oldSelected != id) {
+                onCategoryClick(id)
+            }
         }
     }
 
-    override fun getItemCount(): Int = jsonArray.length()
+    override fun getItemCount(): Int = categories.size
 
     inner class VH(view: View) : RecyclerView.ViewHolder(view) {
         val itemName: TextView = view.findViewById(R.id.item_name)

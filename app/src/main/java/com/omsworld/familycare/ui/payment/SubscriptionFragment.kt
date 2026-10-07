@@ -46,6 +46,7 @@ class SubscriptionFragment : BaseFragment<CocUserPackageActivityBinding>() {
                     binding.LLProfileUI.visibility = View.VISIBLE
                 }
                 is SubscriptionUiState.Error -> snack(state.message)
+            else -> Unit
             }
         }
     }

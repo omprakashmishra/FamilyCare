@@ -1,88 +1,134 @@
 package com.omsworld.familycare.data.repository
 
-import com.omsworld.familycare.core.UrlList
 import com.omsworld.familycare.core.result.ApiResult
 import com.omsworld.familycare.core.result.safeApiCall
-import com.omsworld.familycare.data.remote.ApiService
-import org.json.JSONObject
+import com.omsworld.familycare.data.remote.SupabaseApiService
+import com.omsworld.familycare.data.remote.dto.SupabaseGroceryDto
+import com.omsworld.familycare.data.remote.dto.SupabaseShoppingCategoryDto
+import com.omsworld.familycare.data.remote.dto.SupabaseShoppingSiteDto
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
 class ShoppingRepository @Inject constructor(
-    private val api: ApiService
+    @Named("supabase") private val supabase: SupabaseApiService
 ) {
 
-    suspend fun getGroceryList(userId: String): ApiResult<JSONObject> = safeApiCall {
-        val raw = api.post(
-            UrlList.groceries_list,
-            mapOf("user_id" to userId)
-        ).body() ?: ""
-        JSONObject(raw)
-    }
-
-    suspend fun addGroceryItem(userId: String, note: String): ApiResult<JSONObject> =
+    // ============================================================
+    // GET GROCERIES (groceries_list.php)
+    // ============================================================
+    suspend fun getGroceryList(userId: String): ApiResult<List<SupabaseGroceryDto>> =
         safeApiCall {
-            val raw = api.post(
-                UrlList.add_groceries_list,
-                mapOf("user_id" to userId, "note" to note)
-            ).body() ?: ""
-            JSONObject(raw)
+            supabase.getGroceries(userEq = "eq.$userId")
         }
 
-    suspend fun deleteGroceryItem(userId: String, itemId: String): ApiResult<JSONObject> =
+    // ============================================================
+    // ADD GROCERY (add_groceries_list.php)
+    // ============================================================
+    suspend fun addGroceryItem(userId: String, note: String): ApiResult<Unit> =
         safeApiCall {
-            val raw = api.post(
-                UrlList.delete_groceries_item,
-                mapOf("user_id" to userId, "item_id" to itemId)
-            ).body() ?: ""
-            JSONObject(raw)
+            val item = SupabaseGroceryDto(
+                userId = userId,
+                note = note,
+                isShopped = "0",
+                addedDate = nowIso()
+            )
+            val response = supabase.addGrocery(item)
+            if (!response.isSuccessful) {
+                throw IllegalStateException("Add grocery failed: ${response.code()}")
+            }
         }
 
+    // ============================================================
+    // DELETE GROCERY (delete_groceries_item.php)
+    // ============================================================
+    suspend fun deleteGroceryItem(userId: String, itemId: String): ApiResult<Unit> =
+        safeApiCall {
+            val response = supabase.deleteGrocery(idEq = "eq.$itemId")
+            if (!response.isSuccessful) {
+                throw IllegalStateException("Delete grocery failed: ${response.code()}")
+            }
+        }
+
+    // ============================================================
+    // ADD SHOPPED GROCERIES (add_shopped_groceries.php)
+    // Marks items as shopped and records price.
+    // ============================================================
     suspend fun addShoppedGroceries(
         userId: String,
         item: String,
         finalPrice: String
-    ): ApiResult<JSONObject> = safeApiCall {
-        val raw = api.post(
-            UrlList.add_shopped_groceries,
-            mapOf(
-                "user_id" to userId,
-                "item" to item,
-                "price" to finalPrice
+    ): ApiResult<Unit> = safeApiCall {
+        // item is a comma-separated list of item IDs
+        val ids = item.split(",").map { it.trim() }.filter { it.isNotBlank() }
+        for (id in ids) {
+            val response = supabase.updateGrocery(
+                idEq = "eq.$id",
+                updates = mapOf("is_shopped" to "1", "price" to finalPrice)
             )
-        ).body() ?: ""
-        JSONObject(raw)
+            if (!response.isSuccessful) {
+                throw IllegalStateException("Update grocery failed: ${response.code()}")
+            }
+        }
     }
 
+    // ============================================================
+    // DIRECT PURCHASE (direct_purchase.php)
+    // ============================================================
     suspend fun directPurchase(
         userId: String,
         item: String,
         finalPrice: String
-    ): ApiResult<JSONObject> = safeApiCall {
-        val raw = api.post(
-            UrlList.direct_purchase,
-            mapOf(
-                "user_id" to userId,
-                "note" to item,
-                "price" to finalPrice
-            )
-        ).body() ?: ""
-        JSONObject(raw)
+    ): ApiResult<Unit> = safeApiCall {
+        val entry = SupabaseGroceryDto(
+            userId = userId,
+            note = item,
+            price = finalPrice,
+            isShopped = "1",
+            addedDate = nowIso()
+        )
+        val response = supabase.addGrocery(entry)
+        if (!response.isSuccessful) {
+            throw IllegalStateException("Direct purchase failed: ${response.code()}")
+        }
     }
 
-    suspend fun getShoppedHistory(userId: String): ApiResult<JSONObject> = safeApiCall {
-        val raw = api.post(
-            UrlList.shopped_groceries_history,
-            mapOf("user_id" to userId, "UserID" to userId)
-        ).body() ?: ""
-        JSONObject(raw)
-    }
+    // ============================================================
+    // SHOPPED HISTORY (shopped_groceries_history.php)
+    // ============================================================
+    suspend fun getShoppedHistory(userId: String): ApiResult<List<SupabaseGroceryDto>> =
+        safeApiCall {
+            supabase.getGroceries(userEq = "eq.$userId", isShoppedEq = "eq.1")
+        }
 
-    suspend fun getShoppingSites(categoryId: String): ApiResult<JSONObject> = safeApiCall {
-        val url = if (categoryId == "YES") UrlList.shopping_category
-        else UrlList.shopping_site_list
-        val raw = api.post(url, mapOf("id" to categoryId)).body() ?: ""
-        JSONObject(raw)
-    }
+    // ============================================================
+    // SHOPPING SITES (shopping_site_list.php / shopping_category.php)
+    // ============================================================
+    suspend fun getShoppingSites(categoryId: String): ApiResult<ShoppingListResult> =
+        safeApiCall {
+            if (categoryId == "YES") {
+                // Categories
+                val categories = supabase.getShoppingCategories()
+                ShoppingListResult(sites = emptyList(), categories = categories)
+            } else {
+                // Sites in a category
+                val sites = supabase.getShoppingSites(catEq = "eq.$categoryId")
+                ShoppingListResult(sites = sites, categories = emptyList())
+            }
+        }
+
+    private fun nowIso(): String =
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+            .apply { timeZone = TimeZone.getTimeZone("UTC") }
+            .format(Date())
 }
+
+data class ShoppingListResult(
+    val sites: List<SupabaseShoppingSiteDto>,
+    val categories: List<SupabaseShoppingCategoryDto>
+)

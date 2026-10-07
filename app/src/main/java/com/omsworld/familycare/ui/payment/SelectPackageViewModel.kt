@@ -33,30 +33,26 @@ class SelectPackageViewModel @Inject constructor(
 
     fun loadPackages() = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val countryCode = prefs.getString(ctx, Constants.COUNTYCD, "0")
-        val userName = prefs.getString(ctx, Constants.USER_NAME, "0")
+        val countryCode = prefs.getString(ctx, Constants.COUNTYCD)
+        val userName = prefs.getString(ctx, Constants.USER_NAME)
 
         setState(PackageUiState.Loading)
+
         repo.getPackages(countryCode, userName)
-            .onSuccess { root ->
-                val list = mutableListOf<PackageModel>()
-                val response = root.optJSONObject("Response") ?: root
-                val arr = response.optJSONArray("Data")
-                if (arr != null) {
-                    for (i in 0 until arr.length()) {
-                        val o = arr.optJSONObject(i) ?: continue
-                        list.add(
+            .onSuccess { items ->
+                setState(
+                    PackageUiState.Success(
+                        items.map {
                             PackageModel(
-                                PackageID = o.optString("PackageID"),
-                                PackageName = o.optString("PackageName"),
-                                Amount = o.optString("Amount"),
-                                Type = o.optString("AmountType"),
-                                setPackageDesc = o.optString("PackageDesc")
+                                PackageID = it.packageId,
+                                PackageName = it.packageName,
+                                Amount = it.amount,
+                                Type = it.amountType,
+                                setPackageDesc = it.packageDesc
                             )
-                        )
-                    }
-                }
-                setState(PackageUiState.Success(list))
+                        }
+                    )
+                )
             }
             .onError { msg, _ -> setState(PackageUiState.Error(msg)) }
     }
@@ -68,7 +64,7 @@ class SelectPackageViewModel @Inject constructor(
         referralCode: String
     ) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         val deviceId = android.provider.Settings.Secure.getString(
             ctx.contentResolver, android.provider.Settings.Secure.ANDROID_ID
         )

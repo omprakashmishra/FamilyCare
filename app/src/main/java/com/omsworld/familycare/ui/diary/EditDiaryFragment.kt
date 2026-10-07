@@ -63,6 +63,7 @@ class EditDiaryFragment : BaseFragment<EditDiaryFrBinding>() {
                     parentFragmentManager.popBackStack()
                 }
                 is EditDiaryUiState.Error -> snack(state.message)
+            else -> Unit
             }
         }
     }

@@ -12,6 +12,7 @@ import java.util.TimeZone
 object DateTimeUtil {
 
     private const val SERVER_FMT = "yyyy-MM-dd HH:mm:ss"
+    private const val ISO_FMT = "yyyy-MM-dd'T'HH:mm:ss"
 
     fun formatDateTime(input: String): String {
         return try {
@@ -43,12 +44,57 @@ object DateTimeUtil {
         }
     }
 
+    /**
+     * Chat-style timestamp (WhatsApp-style).
+     *  - Same day     → "10:30 AM"
+     *  - Yesterday    → "Yesterday 10:30 AM"
+     *  - This week    → "Tue 10:30 AM"
+     *  - This year    → "7 Oct, 10:30 AM"
+     *  - Older        → "7 Oct 2025, 10:30 AM"
+     */
     fun changeFormat(input: String): String = try {
-        val sdf = SimpleDateFormat(SERVER_FMT, Locale.getDefault())
-        val date = sdf.parse(input)
-        date?.let {
-            SimpleDateFormat("d MMM yyyy  h:mm a", Locale.getDefault()).format(it)
-        } ?: input
+        // Try several server formats
+        val date: Date? = try {
+            SimpleDateFormat(SERVER_FMT, Locale.getDefault()).parse(input)
+        } catch (_: Exception) {
+            try {
+                SimpleDateFormat(ISO_FMT, Locale.getDefault()).apply {
+                    timeZone = TimeZone.getTimeZone("UTC")
+                }.parse(input)
+            } catch (_: Exception) {
+                null
+            }
+        }
+
+        if (date == null) {
+            input
+        } else {
+            val now = Calendar.getInstance()
+            val msgCal = Calendar.getInstance().apply { time = date }
+
+            val sameYear = now.get(Calendar.YEAR) == msgCal.get(Calendar.YEAR)
+            val sameDay = sameYear &&
+                    now.get(Calendar.DAY_OF_YEAR) == msgCal.get(Calendar.DAY_OF_YEAR)
+
+            val yesterday = Calendar.getInstance().apply {
+                add(Calendar.DAY_OF_YEAR, -1)
+            }
+            val isYesterday = sameYear &&
+                    yesterday.get(Calendar.DAY_OF_YEAR) == msgCal.get(Calendar.DAY_OF_YEAR)
+
+            val diffMillis = now.timeInMillis - date.time
+            val diffDays = diffMillis / (24L * 60 * 60 * 1000)
+
+            val time = SimpleDateFormat("h:mm a", Locale.getDefault()).format(date)
+
+            when {
+                sameDay -> time
+                isYesterday -> "Yesterday $time"
+                diffDays < 7 -> SimpleDateFormat("EEE", Locale.getDefault()).format(date) + " $time"
+                sameYear -> SimpleDateFormat("d MMM, ", Locale.getDefault()).format(date) + time
+                else -> SimpleDateFormat("d MMM yyyy, ", Locale.getDefault()).format(date) + time
+            }
+        }
     } catch (e: Exception) {
         input
     }

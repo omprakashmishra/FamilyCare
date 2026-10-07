@@ -134,6 +134,7 @@ class ProfileFragment : BaseFragment<ProfileFrBinding>() {
                     binding.mprogressBar.visibility = View.GONE
                     snack(state.message)
                 }
+                else -> Unit
             }
         }
     }

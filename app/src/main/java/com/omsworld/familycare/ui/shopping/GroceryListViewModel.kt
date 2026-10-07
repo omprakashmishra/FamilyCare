@@ -31,41 +31,36 @@ class GroceryListViewModel @Inject constructor(
 
     fun load() = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         if (userId.isBlank()) {
             setState(GroceryUiState.Error("Not logged in"))
             return@launch
         }
         setState(GroceryUiState.Loading)
+
         repo.getGroceryList(userId)
-            .onSuccess { root ->
-                val list = mutableListOf<AddedItemModel>()
-                val arr = root.optJSONArray("shopping_note")
-                if (arr != null && arr.length() > 0) {
-                    val day = arr.optJSONObject(0) ?: return@onSuccess
-                    val items = day.optJSONArray("added_item") ?: return@onSuccess
-                    for (i in 0 until items.length()) {
-                        val o = items.optJSONObject(i) ?: continue
-                        list.add(
+            .onSuccess { items ->
+                setState(
+                    GroceryUiState.Success(
+                        items.map {
                             AddedItemModel(
-                                id = o.optString("id"),
-                                added_by = o.optString("added_by"),
-                                added_by_name = o.optString("added_by_name"),
-                                note = o.optString("note"),
-                                added_date = o.optString("added_date"),
-                                isItemShopped = o.optString("is_shopped")
+                                id = it.id?.toString() ?: "",
+                                added_by = it.addedBy ?: "",
+                                added_by_name = it.addedByName ?: "",
+                                note = it.note ?: "",
+                                added_date = it.addedDate ?: "",
+                                isItemShopped = it.isShopped ?: "0"
                             )
-                        )
-                    }
-                }
-                setState(GroceryUiState.Success(list))
+                        }
+                    )
+                )
             }
             .onError { msg, _ -> setState(GroceryUiState.Error(msg)) }
     }
 
     fun addItem(note: String) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         repo.addGroceryItem(userId, note)
             .onSuccess { load() }
             .onError { msg, _ -> showError(msg) }
@@ -73,7 +68,7 @@ class GroceryListViewModel @Inject constructor(
 
     fun deleteItem(itemId: String) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         repo.deleteGroceryItem(userId, itemId)
             .onSuccess { load() }
             .onError { msg, _ -> showError(msg) }

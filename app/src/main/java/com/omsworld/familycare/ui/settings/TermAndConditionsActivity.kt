@@ -4,7 +4,6 @@ import android.app.ProgressDialog
 import android.view.LayoutInflater
 import android.webkit.WebViewClient
 import com.omsworld.familycare.base.BaseActivity
-import com.omsworld.familycare.core.UrlList
 import com.omsworld.familycare.databinding.TermAndConditionsAcBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,7 +32,7 @@ class TermAndConditionsActivity : BaseActivity<TermAndConditionsAcBinding>() {
                 progress.dismiss()
             }
         }
-        binding.WVTermcondition.loadUrl(UrlList.term_condition)
+        binding.WVTermcondition.loadUrl("https://www.familycares.in/terms")
 
         binding.IVBackpress.setOnClickListener { finish() }
     }

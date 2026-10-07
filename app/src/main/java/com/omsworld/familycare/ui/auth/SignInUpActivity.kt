@@ -50,7 +50,7 @@ class SignInUpActivity : BaseActivity<ActivitySigninBinding>() {
         binding.IVOK.setOnClickListener { onOkClick() }
 
         binding.tvTrydemo.setOnClickListener {
-            vm.login("8802455031", "ad")
+            vm.login("9999999999", "1234")
         }
 
         observeState()

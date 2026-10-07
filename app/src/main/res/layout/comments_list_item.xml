@@ -1,147 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp">
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
 
+    <!-- ==================== LEFT (RECEIVED) ==================== -->
     <LinearLayout
         android:id="@+id/LL_chat_left"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="visible"
-        android:padding="5dp">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:gravity="top"
+            android:baselineAligned="false">
 
+            <!-- Avatar -->
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/IV_left_frinds_img"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="top"
                 android:src="@drawable/teacher_fml"
-                app:civ_border_width="0.5dp"
-                app:civ_border_color="@color/white"/>
+                app:civ_border_color="@color/white"
+                app:civ_border_width="1dp" />
 
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/chat_left_arrow"
-                android:tint="@color/white" />
-
+            <!-- Bubble — 5dp below the top of the avatar row -->
             <TextView
                 android:id="@+id/TV_leftChat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="30dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/rectangular_white"
-                android:fontFamily="casual"
-                android:text="fdasfdadfsfdsasdffdsafdfsafdasdfdfafdasfdafdasfsafdasfdasfdsdafdsafdsafd"
-                android:minHeight="23dp"
-                android:maxWidth="220dp"
-                android:gravity="center|left"
-                android:paddingLeft="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:paddingRight="10dp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/head">
-
-            </TextView>
-
+                android:background="@drawable/chat_bubble_received"
+                android:maxWidth="280dp"
+                android:minHeight="32dp"
+                android:gravity="center_vertical|start"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="Hello"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="5dp"
+                android:lineSpacingMultiplier="1.2"
+                android:letterSpacing="0.02"
+                android:textColor="@color/chat_bubble_received_text"
+                />
         </LinearLayout>
 
+        <!-- Timestamp -->
         <TextView
             android:id="@+id/TV_left_datetime"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="monospace"
-            android:gravity="center|left"
-           android:paddingLeft="65dp"
-            android:paddingTop="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="2dp"
             android:singleLine="true"
-            android:text="date time"
-            android:textColor="@color/white"
-            android:textSize="9dp" />
-
+            android:text="10:30 AM"
+            android:textColor="@color/black_light"
+            android:textSize="8sp" />
     </LinearLayout>
 
+    <!-- ==================== RIGHT (SENT) ==================== -->
     <LinearLayout
         android:id="@+id/LL_chat_right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="visible"
-        android:padding="5dp">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="right"
-           >
+            android:gravity="top|end"
+            android:baselineAligned="false">
 
+            <!-- Bubble — 5dp below the top of the avatar row -->
             <TextView
                 android:id="@+id/TV_rightChat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rectangular_white"
-                android:backgroundTint="@color/theme_dark"
-                android:fontFamily="casual"
-                android:minHeight="23dp"
-                android:maxWidth="220dp"
-                android:gravity="center|left"
-                android:paddingLeft="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:paddingRight="10dp"
-                android:text="dafdasdffsdadfsdfsa"
-                android:textColor="@color/white"
-                android:textSize="@dimen/head"/>
-
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/chat_right_arrow"
-                android:layout_marginLeft="-6dp"
-                android:layout_marginRight="10dp"
-                android:tint="@color/theme_dark" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/IV_right_frinds_img"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                app:civ_border_width="0.5dp"
-                app:civ_border_color="@color/white"
-                android:src="@drawable/teacher_fml"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/chat_bubble_sent"
+                android:maxWidth="280dp"
+                android:minHeight="32dp"
+                android:gravity="center_vertical|start"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="5dp"
+                android:lineSpacingMultiplier="1.2"
+                android:letterSpacing="0.02"
+                android:text="Hi there"
+                android:textColor="@color/chat_bubble_received_text" />
 
         </LinearLayout>
 
+        <!-- Timestamp -->
         <TextView
             android:id="@+id/TV_right_datetime"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="monospace"
-            android:gravity="center|right"
-            android:paddingRight="65dp"
-            android:paddingTop="1dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="2dp"
             android:singleLine="true"
-            android:text="date time"
-            android:textColor="@color/white"
-            android:textSize="9dp" />
-
+            android:text="10:31 AM"
+            android:textColor="@color/black_light"
+            android:textSize="8sp" />
     </LinearLayout>
-
 </LinearLayout>

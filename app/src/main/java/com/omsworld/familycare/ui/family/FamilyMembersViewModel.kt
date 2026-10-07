@@ -8,10 +8,10 @@ import com.omsworld.familycare.core.result.onError
 import com.omsworld.familycare.core.result.onSuccess
 import com.omsworld.familycare.data.local.MySharedPreference
 import com.omsworld.familycare.data.model.JoinSafeJoinModel
+import com.omsworld.familycare.data.remote.dto.SupabaseUserDto
 import com.omsworld.familycare.data.repository.FamilyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import javax.inject.Inject
 
 sealed interface FamilyUiState {
@@ -38,34 +38,34 @@ class FamilyMembersViewModel @Inject constructor(
 
     fun loadFamily() = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         if (userId.isBlank()) {
             setState(FamilyUiState.Error("Not logged in"))
             return@launch
         }
         setState(FamilyUiState.Loading)
+
         repo.getFamilyGroupInfo(userId)
-            .onSuccess { root ->
-                val familyId = root.optString("family_id")
-                val familyName = root.optString("family_name")
-                val isAdmin = root.optString("isFamilyAdmin") == "1"
+            .onSuccess { members ->
+                // Read my own family info from prefs
+                val familyName = prefs.getString(ctx, Constants.FAMILY_NAME)
+                val isAdmin = prefs.getString(ctx, Constants.IsFamilyAdmin) == "1"
 
-                prefs.setString(ctx, Constants.FAMILY_ID, familyId)
-                prefs.setString(ctx, Constants.FAMILY_NAME, familyName)
-                prefs.setString(ctx, Constants.IsFamilyAdmin, if (isAdmin) "1" else "0")
-
-                val members = parseMembers(root)
-                setState(FamilyUiState.Success(familyName, isAdmin, members))
+                setState(
+                    FamilyUiState.Success(
+                        familyName = familyName,
+                        isAdmin = isAdmin,
+                        members = members.map { it.toJoinSafeJoinModel(familyName) }
+                    )
+                )
             }
-            .onError { msg, _ ->
-                setState(FamilyUiState.Error(msg))
-            }
+            .onError { msg, _ -> setState(FamilyUiState.Error(msg)) }
     }
 
     fun addMember(mobile: String, name: String) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
-        val familyId = prefs.getString(ctx, Constants.FAMILY_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
+        val familyId = prefs.getString(ctx, Constants.FAMILY_ID)
         repo.addFamilyMember(userId, familyId, mobile)
             .onSuccess {
                 showMessage("Invitation sent to $name")
@@ -76,8 +76,8 @@ class FamilyMembersViewModel @Inject constructor(
 
     fun removeMember(memberMobile: String) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
-        val familyId = prefs.getString(ctx, Constants.FAMILY_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
+        val familyId = prefs.getString(ctx, Constants.FAMILY_ID)
         repo.removeFamilyMember(userId, familyId, memberMobile)
             .onSuccess {
                 showMessage("Member removed")
@@ -85,51 +85,20 @@ class FamilyMembersViewModel @Inject constructor(
             }
             .onError { msg, _ -> showError(msg) }
     }
-
-    private fun parseMembers(root: JSONObject): List<JoinSafeJoinModel> {
-        val list = mutableListOf<JoinSafeJoinModel>()
-        val friends = root.optJSONArray("freind_list")
-        if (friends != null) {
-            for (i in 0 until friends.length()) {
-                val o = friends.optJSONObject(i) ?: continue
-                list.add(
-                    JoinSafeJoinModel(
-                        user_id = o.optString("user_id"),
-                        user_name = o.optString("user_name"),
-                        user_mobile = o.optString("user_mob"),
-                        user_image = o.optString("user_img"),
-                        OnlineStatus = o.optString("status"),
-                        address = o.optString("address"),
-                        time = o.optString("time"),
-                        request_type = o.optString("type"),
-                        member_status = o.optString("member_status"),
-                        family_id = root.optString("family_id"),
-                        family_name = root.optString("family_name")
-                    )
-                )
-            }
-        }
-        val requests = root.optJSONArray("request_list")
-        if (requests != null) {
-            for (i in 0 until requests.length()) {
-                val o = requests.optJSONObject(i) ?: continue
-                list.add(
-                    JoinSafeJoinModel(
-                        user_id = o.optString("user_id"),
-                        user_name = o.optString("user_name"),
-                        user_mobile = o.optString("user_mobile"),
-                        user_image = o.optString("user_img"),
-                        OnlineStatus = o.optString("status"),
-                        address = o.optString("address"),
-                        time = o.optString("time"),
-                        request_type = "friend_request",
-                        member_status = o.optString("member_status"),
-                        family_id = o.optString("family_id"),
-                        family_name = o.optString("family_name")
-                    )
-                )
-            }
-        }
-        return list
-    }
 }
+
+// ---- Mapping helper: SupabaseUserDto → JoinSafeJoinModel ----
+private fun SupabaseUserDto.toJoinSafeJoinModel(familyName: String): JoinSafeJoinModel =
+    JoinSafeJoinModel(
+        user_id = aspnetUserId ?: "",
+        user_name = userName ?: "",
+        user_mobile = mobileNo ?: "",
+        user_image = userImg ?: "",
+        OnlineStatus = "Offline",
+        address = "",
+        time = "",
+        request_type = "member",
+        member_status = if (isFamilyAdmin == true) "Owner" else "Member",
+        family_id = familyId ?: "",
+        family_name = familyName
+    )

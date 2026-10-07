@@ -33,35 +33,29 @@ class FriendsListViewModel @Inject constructor(
 
     fun loadFriends() = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         if (userId.isBlank()) {
             setState(FriendsListUiState.Error("Not logged in"))
             return@launch
         }
         setState(FriendsListUiState.Loading)
+
         repo.getChatList(userId)
-            .onSuccess { root ->
-                val list = mutableListOf<FriendListModel>()
-                val arr = root.optJSONArray("chat_user_info")
-                if (arr != null) {
-                    for (i in 0 until arr.length()) {
-                        val o = arr.optJSONObject(i) ?: continue
-                        list.add(
-                            FriendListModel(
-                                freind_id = o.optString("freind_id"),
-                                freind_fullname = o.optString("freind_fullname"),
-                                freind_img = o.optString("freind_img"),
-                                friend_phone = o.optString("friend_phone"),
-                                message = o.optString("message"),
-                                message_id = o.optString("message_id"),
-                                sender_id = o.optString("sender_id"),
-                                time = o.optString("time"),
-                                type = o.optString("type")
-                            )
-                        )
-                    }
+            .onSuccess { items ->
+                val friends = items.map { item ->
+                    FriendListModel(
+                        freind_id = item.friendId,
+                        freind_fullname = item.friendFullName,
+                        freind_img = item.friendImg,
+                        friend_phone = item.friendPhone,
+                        message = item.message,
+                        message_id = item.messageId,
+                        sender_id = item.senderId,
+                        time = item.time,
+                        type = item.type
+                    )
                 }
-                setState(FriendsListUiState.Success(list))
+                setState(FriendsListUiState.Success(friends))
             }
             .onError { msg, _ -> setState(FriendsListUiState.Error(msg)) }
     }

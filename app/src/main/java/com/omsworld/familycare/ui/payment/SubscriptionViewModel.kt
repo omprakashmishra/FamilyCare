@@ -39,19 +39,19 @@ class SubscriptionViewModel @Inject constructor(
 
     fun load() = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userName = prefs.getString(ctx, Constants.USER_NAME, "0")
+        val userName = prefs.getString(ctx, Constants.USER_NAME)
         setState(SubscriptionUiState.Loading)
+
         repo.getUserInfo(userName)
-            .onSuccess { root ->
-                val data = root.optJSONObject("data") ?: return@onSuccess
+            .onSuccess { user ->
                 setState(
                     SubscriptionUiState.Loaded(
-                        packageName = data.optString("PackageName"),
-                        amount = data.optString("Amount"),
-                        startDate = data.optString("StartDate"),
-                        endDate = data.optString("EndDate"),
-                        activationCode = data.optString("ActivationCode"),
-                        paymentStatus = data.optString("PaymentStatusDescription")
+                        packageName = prefs.getString(ctx, Constants.PACKAGE_NAME),
+                        amount = prefs.getString(ctx, Constants.PACKAGE_AMOUNT),
+                        startDate = prefs.getString(ctx, "StartDate"),
+                        endDate = prefs.getString(ctx, "EndDate"),
+                        activationCode = user.activationCode ?: "",
+                        paymentStatus = user.paymentStatusCode ?: ""
                     )
                 )
             }
@@ -60,7 +60,7 @@ class SubscriptionViewModel @Inject constructor(
 
     fun resendMail() = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID, "0")
+        val userId = prefs.getString(ctx, Constants.USER_ID)
         repo.resendMail(userId)
             .onSuccess { showMessage("Mail sent") }
             .onError { msg, _ -> showError(msg) }

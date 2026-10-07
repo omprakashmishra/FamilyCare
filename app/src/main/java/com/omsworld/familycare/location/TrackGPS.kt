@@ -27,7 +27,7 @@ class TrackGPS(private val context: Context) {
             var best: Location? = null
             for (p in providers) {
                 val loc = lm.getLastKnownLocation(p) ?: continue
-                if (best == null || loc.accuracy < best!!.accuracy) best = loc
+                if (best == null || loc.accuracy < best.accuracy) best = loc
             }
             best
         } catch (_: SecurityException) {

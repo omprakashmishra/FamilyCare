@@ -1,5 +1,6 @@
 package com.omsworld.familycare.ui.chat
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -37,11 +38,13 @@ class FriendsListFragment : BaseFragment<ChatListUserFrBinding>() {
                 putString("friend_Id", friend.freind_id)
                 putString("friend_Phone", friend.friend_phone)
             }
-            val fragment = ChatFragment().apply { arguments = bundle }
-            (activity as? MainActivity)?.supportFragmentManager?.beginTransaction()
-                ?.replace(com.omsworld.familycare.R.id.fragment_container, fragment)
-                ?.addToBackStack(null)
-                ?.commit()
+            val intent = Intent(requireContext(), ChatActivity::class.java).apply {
+                putExtra("friend_Name", friend.freind_fullname)
+                putExtra("friend_Img", friend.freind_img)
+                putExtra("friend_Id", friend.freind_id)
+                putExtra("friend_Phone", friend.friend_phone)
+            }
+            startActivity(intent)
         }
 
         binding.RVFriends.layoutManager = LinearLayoutManager(requireContext())

@@ -5,17 +5,17 @@ import com.omsworld.familycare.base.BaseViewModel
 import com.omsworld.familycare.core.result.onError
 import com.omsworld.familycare.core.result.onSuccess
 import com.omsworld.familycare.data.model.ShoppingModel
+import com.omsworld.familycare.data.remote.dto.SupabaseShoppingCategoryDto
 import com.omsworld.familycare.data.repository.ShoppingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import org.json.JSONArray
 import javax.inject.Inject
 
 sealed interface ShoppingSitesUiState {
     data object Loading : ShoppingSitesUiState
     data class Success(
         val sites: List<ShoppingModel>,
-        val categories: JSONArray?
+        val categories: List<SupabaseShoppingCategoryDto>
     ) : ShoppingSitesUiState
     data class Error(val message: String) : ShoppingSitesUiState
 }
@@ -31,30 +31,22 @@ class ShoppingSitesListViewModel @Inject constructor(
 
     fun load(categoryId: String) = viewModelScope.launch {
         setState(ShoppingSitesUiState.Loading)
+
         repo.getShoppingSites(categoryId)
-            .onSuccess { root ->
-                val status = root.optString("success")
-                if (status != "1") {
-                    setState(ShoppingSitesUiState.Error("Failed to load"))
-                    return@onSuccess
-                }
-                val categories = root.optJSONArray("shopping_category")
-                val list = mutableListOf<ShoppingModel>()
-                val arr = root.optJSONArray("shopping_site_list")
-                if (arr != null) {
-                    for (i in 0 until arr.length()) {
-                        val o = arr.optJSONObject(i) ?: continue
-                        list.add(
+            .onSuccess { result ->
+                setState(
+                    ShoppingSitesUiState.Success(
+                        sites = result.sites.map {
                             ShoppingModel(
-                                id = o.optString("id"),
-                                title = o.optString("name"),
-                                url = o.optString("url"),
-                                image = o.optString("image")
+                                id = it.id?.toString() ?: "",
+                                title = it.name ?: "",
+                                url = it.url ?: "",
+                                image = it.image ?: ""
                             )
-                        )
-                    }
-                }
-                setState(ShoppingSitesUiState.Success(list, categories))
+                        },
+                        categories = result.categories
+                    )
+                )
             }
             .onError { msg, _ -> setState(ShoppingSitesUiState.Error(msg)) }
     }

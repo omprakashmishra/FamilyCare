@@ -18,7 +18,7 @@ class MapScrollableFragment : SupportMapFragment() {
         viewGroup: ViewGroup?,
         savedInstance: Bundle?
     ): View {
-        val layout: View = super.onCreateView(layoutInflater, viewGroup, savedInstance)!!
+        val layout: View = super.onCreateView(layoutInflater, viewGroup, savedInstance)
 
         val frameLayout = TouchableWrapper(requireActivity())
         frameLayout.setBackgroundColor(

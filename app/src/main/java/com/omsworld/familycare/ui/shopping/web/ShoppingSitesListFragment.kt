@@ -55,17 +55,21 @@ class ShoppingSitesListFragment : BaseFragment<ShopingSitesFrBinding>() {
                     gridArray.addAll(state.sites)
                     gridAdapter.notifyDataSetChanged()
 
-                    state.categories?.let { cats ->
+                    if (state.categories.isNotEmpty()) {
                         val adapter = HeadCategoryAdapter(
-                            requireContext(),
-                            cats,
-                            com.omsworld.familycare.R.layout.head_category_item
-                        ) { id -> vm.load(id) }
-                        binding.RVCategories.layoutManager = GridLayoutManager(requireContext(), 3)
+                            context = requireContext(),
+                            categories = state.categories,
+                            layoutId = com.omsworld.familycare.R.layout.head_category_item
+                        ) { id ->
+                            vm.load(id)
+                        }
+                        binding.RVCategories.layoutManager =
+                            GridLayoutManager(requireContext(), 3)
                         binding.RVCategories.adapter = adapter
                     }
                 }
                 is ShoppingSitesUiState.Error -> snack(state.message)
+                else -> Unit
             }
         }
     }

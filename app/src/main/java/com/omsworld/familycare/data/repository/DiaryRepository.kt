@@ -1,40 +1,42 @@
 package com.omsworld.familycare.data.repository
 
-import com.omsworld.familycare.core.UrlList
 import com.omsworld.familycare.core.result.ApiResult
 import com.omsworld.familycare.core.result.safeApiCall
-import com.omsworld.familycare.data.remote.ApiService
-import org.json.JSONObject
+import com.omsworld.familycare.data.remote.SupabaseApiService
+import com.omsworld.familycare.data.remote.dto.SupabaseDiaryDto
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
 class DiaryRepository @Inject constructor(
-    private val api: ApiService
+    @Named("supabase") private val supabase: SupabaseApiService
 ) {
 
-    suspend fun getDiaryList(userId: String): ApiResult<JSONObject> = safeApiCall {
-        val raw = api.post(
-            UrlList.show_diary,
-            mapOf("user_id" to userId, "UserID" to userId)
-        ).body() ?: ""
-        JSONObject(raw)
-    }
+    suspend fun getDiaryList(userId: String): ApiResult<List<SupabaseDiaryDto>> =
+        safeApiCall {
+            supabase.getDiary(userEq = "eq.$userId")
+        }
 
     suspend fun addDiary(
         userId: String,
         subject: String,
         note: String
-    ): ApiResult<JSONObject> = safeApiCall {
-        val raw = api.post(
-            UrlList.add_diary,
-            mapOf(
-                "user_id" to userId,
-                "subject" to subject,
-                "note" to note
-            )
-        ).body() ?: ""
-        JSONObject(raw)
+    ): ApiResult<Unit> = safeApiCall {
+        val entry = SupabaseDiaryDto(
+            userId = userId,
+            subject = subject,
+            note = note,
+            addedDate = nowIso()
+        )
+        val response = supabase.addDiary(entry)
+        if (!response.isSuccessful) {
+            throw IllegalStateException("Add diary failed: ${response.code()}")
+        }
     }
 
     suspend fun editDiary(
@@ -42,25 +44,26 @@ class DiaryRepository @Inject constructor(
         noteId: String,
         subject: String,
         note: String
-    ): ApiResult<JSONObject> = safeApiCall {
-        val raw = api.post(
-            UrlList.edit_diary,
-            mapOf(
-                "user_id" to userId,
-                "note_id" to noteId,
-                "subject" to subject,
-                "note" to note
-            )
-        ).body() ?: ""
-        JSONObject(raw)
+    ): ApiResult<Unit> = safeApiCall {
+        val response = supabase.updateDiary(
+            idEq = "eq.$noteId",
+            updates = mapOf("subject" to subject, "note" to note)
+        )
+        if (!response.isSuccessful) {
+            throw IllegalStateException("Edit diary failed: ${response.code()}")
+        }
     }
 
-    suspend fun deleteDiary(userId: String, noteId: String): ApiResult<JSONObject> =
+    suspend fun deleteDiary(userId: String, noteId: String): ApiResult<Unit> =
         safeApiCall {
-            val raw = api.post(
-                UrlList.delete_diary,
-                mapOf("user_id" to userId, "note_id" to noteId)
-            ).body() ?: ""
-            JSONObject(raw)
+            val response = supabase.deleteDiary(idEq = "eq.$noteId")
+            if (!response.isSuccessful) {
+                throw IllegalStateException("Delete diary failed: ${response.code()}")
+            }
         }
+
+    private fun nowIso(): String =
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+            .apply { timeZone = TimeZone.getTimeZone("UTC") }
+            .format(Date())
 }

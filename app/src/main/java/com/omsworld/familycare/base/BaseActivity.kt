@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -33,11 +34,9 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     private var _binding: VB? = null
     protected val binding: VB get() = _binding!!
 
-    /** Lazy, safe access to prefs without Hilt injection. */
     protected val prefs: MySharedPreference
         get() = MySharedPreference.getInstance()
 
-    /** Lazy, safe access to network monitor. */
     protected val networkMonitor: NetworkMonitor by lazy {
         NetworkMonitor(applicationContext)
     }
@@ -62,9 +61,40 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         }
     }
 
+    // ============================================================
+    // TOOLBAR HELPERS
+    // ============================================================
+
+    /**
+     * Subclasses override this to return their toolbar.
+     * Default: null.
+     */
+    protected open fun getToolbar(): Toolbar? = null
+
+    protected fun setToolbarTitle(title: String) {
+        getToolbar()?.title = title
+    }
+
+    protected fun enableBackButton() {
+        val toolbar = getToolbar() ?: return
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        toolbar.setNavigationOnClickListener { onBackPressed() }
+    }
+
+    protected fun showToolbar(visible: Boolean) {
+        getToolbar()?.visibility = if (visible) View.VISIBLE else View.GONE
+    }
+
+    // ============================================================
+    // UTILITIES
+    // ============================================================
+
     protected fun color(@ColorRes id: Int): Int = ContextCompat.getColor(this, id)
 
-    protected fun toast(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+    protected fun toast(msg: String) =
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
 
     protected fun toast(@StringRes msgRes: Int) =
         Toast.makeText(this, msgRes, Toast.LENGTH_LONG).show()

@@ -22,7 +22,7 @@ class ChatService : Service() {
                 val sender = payload.optString("sender_name")
                 val text = payload.optString("text")
 
-                if (VisibleFragmentTracker.visibleFragment != "ChatFragment") {
+                if (VisibleFragmentTracker.visibleFragment != "ChatActivity") {
                     NotificationHelper(this).sendNotification(
                         type, sender, text, MainActivity::class.java
                     )

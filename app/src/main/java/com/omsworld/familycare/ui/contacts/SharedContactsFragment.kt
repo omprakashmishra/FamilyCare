@@ -134,6 +134,7 @@ class SharedContactsFragment : BaseFragment<SharedContactsFrBinding>() {
                     adapter.submitList(allContacts)
                 }
                 is SharedContactsUiState.Error -> snack(state.message)
+            else -> Unit
             }
         }
     }

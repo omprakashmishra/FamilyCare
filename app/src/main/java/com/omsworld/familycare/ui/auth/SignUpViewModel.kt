@@ -2,14 +2,12 @@ package com.omsworld.familycare.ui.auth
 
 import androidx.lifecycle.viewModelScope
 import com.omsworld.familycare.base.BaseViewModel
-import com.omsworld.familycare.core.UrlList
 import com.omsworld.familycare.core.result.onError
 import com.omsworld.familycare.core.result.onSuccess
 import com.omsworld.familycare.data.model.CountryCodeModel
 import com.omsworld.familycare.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import javax.inject.Inject
 
 sealed interface SignUpUiState {
@@ -40,29 +38,21 @@ class SignUpViewModel @Inject constructor(
     ) = viewModelScope.launch {
         setState(SignUpUiState.Loading)
 
-        authRepo.postRaw(
-            UrlList.reg_with_mob,
-            mapOf(
-                "UserName" to username,
-                "Email" to email,
-                "MobileNo" to mobile,
-                "Password" to password
-            )
-        ).onSuccess { raw ->
-            try {
-                val obj = JSONObject(raw)
-                val status = obj.optString("status")
-                val message = obj.optString("message")
-                if (status == "1") {
-                    setState(SignUpUiState.Success(mobile))
-                } else {
-                    setState(SignUpUiState.Error(message.ifBlank { "Registration failed" }))
-                }
-            } catch (e: Exception) {
-                setState(SignUpUiState.Error("Invalid response"))
+        // Unique user ID based on timestamp
+        val userId = "user_${System.currentTimeMillis()}"
+
+        authRepo.register(
+            userId = userId,
+            userName = username,
+            email = email,
+            mobile = mobile,
+            password = password
+        )
+            .onSuccess {
+                setState(SignUpUiState.Success(mobile))
             }
-        }.onError { msg, _ ->
-            setState(SignUpUiState.Error(msg))
-        }
+            .onError { msg, _ ->
+                setState(SignUpUiState.Error(msg))
+            }
     }
 }
