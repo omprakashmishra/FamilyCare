@@ -53,7 +53,8 @@ data class SupabaseFamilyRequestDto(
     @Json(name = "member_mob") val memberMob: String? = null,
     @Json(name = "action") val action: String? = null,
     @Json(name = "is_accepted") val isAccepted: String? = "0",
-    @Json(name = "is_declined") val isDeclined: String? = "0"
+    @Json(name = "is_declined") val isDeclined: String? = "0",
+    @Json(name = "created_at") val createdAt: String? = null
 )
 
 // ==================== PHONE BOOK ====================

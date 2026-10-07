@@ -8,12 +8,14 @@ import com.omsworld.familycare.core.result.onError
 import com.omsworld.familycare.core.result.onSuccess
 import com.omsworld.familycare.data.local.MySharedPreference
 import com.omsworld.familycare.data.model.JoinSafeJoinModel
+import com.omsworld.familycare.data.remote.SupabaseApiService
 import com.omsworld.familycare.data.remote.dto.SupabaseUserDto
 import com.omsworld.familycare.data.repository.FamilyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
+import javax.inject.Named
 
 sealed interface FamilyUiState {
     data object Loading : FamilyUiState
@@ -29,7 +31,8 @@ sealed interface FamilyUiState {
 @HiltViewModel
 class FamilyMembersViewModel @Inject constructor(
     private val repo: FamilyRepository,
-    private val prefs: MySharedPreference
+    private val prefs: MySharedPreference,
+    @Named("supabase") private val supabase: SupabaseApiService
 ) : BaseViewModel<FamilyUiState>() {
 
     override val initialState: FamilyUiState = FamilyUiState.Loading
@@ -38,58 +41,87 @@ class FamilyMembersViewModel @Inject constructor(
         loadFamily()
     }
 
-    // ============================================================
-    // LOAD FAMILY + MEMBERS
-    // ============================================================
     fun loadFamily() = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
         val userId = prefs.getString(ctx, Constants.USER_ID)
+        val myMobile = prefs.getString(ctx, Constants.MOBILE_only)
+        val familyId = prefs.getString(ctx, Constants.FAMILY_ID)
+        val familyName = prefs.getString(ctx, Constants.FAMILY_NAME)
+        val isAdmin = prefs.getString(ctx, Constants.IsFamilyAdmin) == "1"
+
+        Timber.d("loadFamily: userId=$userId myMobile=$myMobile familyId=$familyId")
+
         if (userId.isBlank()) {
             setState(FamilyUiState.Error("Not logged in"))
             return@launch
         }
         setState(FamilyUiState.Loading)
 
-        // 1. Fetch my own record to get latest family info
         repo.getFamilyGroupInfo(userId)
             .onSuccess { members ->
-                // Re-read from prefs (AuthRepository.saveSession writes these)
-                var familyId = prefs.getString(ctx, Constants.FAMILY_ID)
-                var familyName = prefs.getString(ctx, Constants.FAMILY_NAME)
-                var isAdmin = prefs.getString(ctx, Constants.IsFamilyAdmin) == "1"
+                val memberModels = members.map { it.toJoinSafeJoinModel(familyName) }
+                Timber.d("loadFamily: found ${memberModels.size} members")
 
-                // If prefs are empty but we're in a family, sync from Supabase
-                if (familyId.isBlank() && members.isNotEmpty()) {
-                    // Try to find my record to get family_id
-                    val me = members.firstOrNull { it.aspnetUserId == userId }
-                    if (me != null && !me.familyId.isNullOrBlank()) {
-                        familyId = me.familyId
-                        familyName = me.familyName ?: ""
-                        isAdmin = me.isFamilyAdmin == true
-
-                        prefs.setString(ctx, Constants.FAMILY_ID, familyId)
-                        prefs.setString(ctx, Constants.FAMILY_NAME, familyName)
-                        prefs.setString(ctx, Constants.IsFamilyAdmin, if (isAdmin) "1" else "0")
-
-                        Timber.d("Synced family from Supabase: id=$familyId name=$familyName admin=$isAdmin")
-                    }
-                }
+                // Fetch pending join requests
+                val requestModels = if (myMobile.isNotBlank()) {
+                    fetchJoinRequests(myMobile, familyName, familyId, memberModels)
+                } else emptyList()
 
                 setState(
                     FamilyUiState.Success(
                         familyId = familyId,
                         familyName = familyName.ifBlank { "My Family" },
                         isAdmin = isAdmin,
-                        members = members.map { it.toJoinSafeJoinModel(familyName) }
+                        members = memberModels + requestModels
                     )
                 )
             }
-            .onError { msg, _ -> setState(FamilyUiState.Error(msg)) }
+            .onError { msg, _ ->
+                Timber.e("loadFamily error: $msg")
+                setState(FamilyUiState.Error(msg))
+            }
     }
 
-    // ============================================================
-    // CREATE OR UPDATE FAMILY
-    // ============================================================
+    private suspend fun fetchJoinRequests(
+        myMobile: String,
+        familyName: String,
+        familyId: String,
+        existingMembers: List<JoinSafeJoinModel>
+    ): List<JoinSafeJoinModel> {
+        return try {
+            val requests = supabase.getRequestsForPhone(toPhoneEq = "eq.$myMobile")
+            Timber.d("fetchJoinRequests: found ${requests.size} pending requests")
+
+            val existingMobiles = existingMembers.map { it.user_mobile }.toSet()
+
+            requests
+                .filter { !existingMobiles.contains(it.fromPhone) }
+                .mapNotNull { req ->
+                    val requester = try {
+                        supabase.getUserByMobile(mobileEq = "eq.${req.fromPhone}")
+                            .firstOrNull()
+                    } catch (e: Exception) { null }
+
+                    JoinSafeJoinModel(
+                        user_id = requester?.aspnetUserId ?: "",
+                        user_name = requester?.userName ?: "Unknown",
+                        user_mobile = requester?.mobileNo ?: req.fromPhone,
+                        user_image = requester?.userImg ?: "",
+                        OnlineStatus = "Offline",
+                        address = "",
+                        time = req.createdAt ?: "",
+                        request_type = "freind_request",
+                        member_status = "Request",
+                        family_id = req.familyId ?: familyId,
+                        family_name = familyName
+                    )
+                }
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to fetch join requests")
+            emptyList()
+        }
+    }
+
     fun createOrUpdateFamily(groupName: String) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
         val userId = prefs.getString(ctx, Constants.USER_ID)
@@ -104,12 +136,9 @@ class FamilyMembersViewModel @Inject constructor(
             return@launch
         }
 
-        // Generate a unique family ID if creating for the first time
         if (familyId.isBlank()) {
             familyId = "FAM_${System.currentTimeMillis()}"
         }
-
-        Timber.d("createOrUpdateFamily: id=$familyId name=$groupName")
 
         repo.createFamilyGroup(familyId, userId, groupName)
             .onSuccess {
@@ -122,9 +151,6 @@ class FamilyMembersViewModel @Inject constructor(
             .onError { msg, _ -> showError(msg) }
     }
 
-    // ============================================================
-    // ADD MEMBER
-    // ============================================================
     fun addMember(mobile: String, name: String) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
         val userId = prefs.getString(ctx, Constants.USER_ID)
@@ -132,10 +158,6 @@ class FamilyMembersViewModel @Inject constructor(
 
         if (familyId.isBlank()) {
             showError("Please create a family first")
-            return@launch
-        }
-        if (mobile.length < 9) {
-            showError("Enter a valid mobile number")
             return@launch
         }
 
@@ -147,9 +169,6 @@ class FamilyMembersViewModel @Inject constructor(
             .onError { msg, _ -> showError(msg) }
     }
 
-    // ============================================================
-    // REMOVE MEMBER
-    // ============================================================
     fun removeMember(memberMobile: String) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
         val userId = prefs.getString(ctx, Constants.USER_ID)
@@ -168,28 +187,47 @@ class FamilyMembersViewModel @Inject constructor(
             .onError { msg, _ -> showError(msg) }
     }
 
-    // ============================================================
-    // LEAVE FAMILY (for non-admins)
-    // ============================================================
-    fun leaveFamily() = viewModelScope.launch {
+    fun acceptJoinRequest(requester: JoinSafeJoinModel) = viewModelScope.launch {
         val ctx = FamilyCareApp.appContext
-        val userId = prefs.getString(ctx, Constants.USER_ID)
+        val myUserId = prefs.getString(ctx, Constants.USER_ID)
         val familyId = prefs.getString(ctx, Constants.FAMILY_ID)
 
         if (familyId.isBlank()) {
-            showError("No family to leave")
+            showError("Create a family first")
             return@launch
         }
 
-        repo.leaveFamily(userId, familyId)
+        // 1. Add requester to family
+        repo.addFamilyMember(myUserId, familyId, requester.user_mobile)
             .onSuccess {
-                prefs.setString(ctx, Constants.FAMILY_ID, "")
-                prefs.setString(ctx, Constants.FAMILY_NAME, "")
-                prefs.setString(ctx, Constants.IsFamilyAdmin, "0")
-                showMessage("Left family")
+                // 2. Mark request as accepted
+                markRequestHandled(requester.user_mobile, accepted = true)
+                showMessage("${requester.user_name} joined your family")
                 loadFamily()
             }
             .onError { msg, _ -> showError(msg) }
+    }
+
+    fun declineJoinRequest(requester: JoinSafeJoinModel) = viewModelScope.launch {
+        markRequestHandled(requester.user_mobile, accepted = false)
+        showMessage("Request declined")
+        loadFamily()
+    }
+
+    private suspend fun markRequestHandled(fromPhone: String, accepted: Boolean) {
+        try {
+            val myMobile = prefs.getString(FamilyCareApp.appContext, Constants.MOBILE_only)
+            val requests = supabase.getRequestsForPhone(toPhoneEq = "eq.$myMobile")
+            val target = requests.firstOrNull { it.fromPhone == fromPhone }
+            if (target?.id != null) {
+                val updates = if (accepted) mapOf("is_accepted" to "1")
+                else mapOf("is_declined" to "1")
+                supabase.updateFamilyRequest(idEq = "eq.${target.id}", updates = updates)
+                Timber.d("markRequestHandled: request ${target.id} -> $updates")
+            }
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to mark request")
+        }
     }
 }
 

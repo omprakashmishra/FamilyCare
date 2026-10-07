@@ -56,10 +56,22 @@ class FamilyMembersFragment : BaseFragment<FamilyMemberFrBinding>() {
         adapter = MyFriendAdapterList(
             onDeleteClick = { member -> confirmRemove(member.user_mobile) },
             onCallClick = { member -> dialNumber(member.user_mobile) },
-            onChatClick = { /* navigate to chat */ },
-            onAcceptClick = { member -> vm.loadFamily() },
-            onDeclineClick = { member -> vm.removeMember(member.user_mobile) },
-            onProfileClick = { /* show profile dialog */ }
+            onChatClick = { member -> /* open chat */ },
+            onAcceptClick = { member ->
+                if (member.request_type == "freind_request") {
+                    vm.acceptJoinRequest(member)
+                } else {
+                    vm.loadFamily()
+                }
+            },
+            onDeclineClick = { member ->
+                if (member.request_type == "freind_request") {
+                    vm.declineJoinRequest(member)
+                } else {
+                    vm.removeMember(member.user_mobile)
+                }
+            },
+            onProfileClick = { member -> /* show profile dialog */ }
         )
         binding.RVFriendsList.layoutManager = LinearLayoutManager(requireContext())
         binding.RVFriendsList.adapter = adapter

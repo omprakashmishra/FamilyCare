@@ -223,4 +223,12 @@ interface SupabaseApiService {
         @Query("id") idEq: String
     ): Response<Unit>
 
+    @GET("rest/v1/family_requests")
+    suspend fun getRequestsForPhone(
+        @Query("to_phone") toPhoneEq: String,
+        @Query("is_accepted") acceptedEq: String = "eq.0",
+        @Query("is_declined") declinedEq: String = "eq.0",
+        @Query("select") select: String = "*"
+    ): List<SupabaseFamilyRequestDto>
+
 }

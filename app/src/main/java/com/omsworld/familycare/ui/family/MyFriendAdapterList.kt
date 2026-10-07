@@ -39,24 +39,25 @@ class MyFriendAdapterList(
             RLAccept.visibility = View.GONE
 
             when (item.request_type) {
-                "friend_request" -> {
+                "freind_request" -> {
+                    // Pending join request
                     RLAccept.visibility = View.VISIBLE
                     TVFamilyName.text = "Family: ${item.family_name}"
                     Nameid.text = "Owner: ${item.user_name}"
                     TVPhoneRequest.text = item.user_mobile
+
+                    BTAccept.setOnClickListener { onAcceptClick(item) }
+                    BnDeclineR.setOnClickListener { onDeclineClick(item) }
                 }
-                "sent_request" -> { /* WIP */ }
                 else -> {
+                    // Regular member
                     RLFriends.visibility = View.VISIBLE
                     TVName.text = item.user_name
-                    tvAddress.text = item.address
+                    TVLocationStatus.text = item.address
                     TVDatetime.text = item.time
-
-                    if (item.member_status == "Owner") {
-                        TVPhone.text = "Family Admin ${item.user_mobile}"
-                    } else {
-                        TVPhone.text = item.user_mobile
-                    }
+                    TVPhone.text = if (item.member_status == "Owner")
+                        "Family Admin ${item.user_mobile}"
+                    else item.user_mobile
 
                     CIVProfileImage.load(item.user_image) {
                         placeholder(R.drawable.user_ic)
@@ -70,9 +71,6 @@ class MyFriendAdapterList(
                     RLFriends.setOnClickListener { onProfileClick(item) }
                 }
             }
-
-            BnDeclineR.setOnClickListener { onDeclineClick(item) }
-            BTAccept.setOnClickListener { onAcceptClick(item) }
         }
     }
 

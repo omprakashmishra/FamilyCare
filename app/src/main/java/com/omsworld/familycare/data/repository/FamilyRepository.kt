@@ -50,6 +50,15 @@ class FamilyRepository @Inject constructor(
         }
     }
 
+    /**
+     * Get all pending family join requests for a given phone number.
+     */
+    suspend fun getPendingRequests(
+        toPhone: String
+    ): ApiResult<List<SupabaseFamilyRequestDto>> = safeApiCall {
+        supabase.getRequestsForPhone(toPhoneEq = "eq.$toPhone")
+    }
+
     // ============================================================
     // ADD MEMBER (add_family_on_group.php)
     // ============================================================

@@ -203,7 +203,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:src="@drawable/ic_phone"
-                        android:tint="@color/theme_dark" />
+                        app:tint="@color/theme_dark" />
                     <ImageView
 
                         android:layout_width="23dp"
