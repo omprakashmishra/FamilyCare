@@ -85,7 +85,6 @@
     <string name="save_menu_noteedit">Save</string>
     <string name="delete_menu_noteedit">Delete</string>
 
-
     <string name="admob_app_id"> </string>
     <string name="PlacesBanner"> </string>
     <string name="version">V - 6.09</string>
@@ -109,6 +108,30 @@
     <string name="terms_and_conditions">Terms &amp; Conditions</string>
     <string name="password">Pin</string>
 
+    <!-- UI titles and messages -->
+    <string name="family_care_title">Family Care</string>
+    <string name="home_title">Home</string>
+    <string name="family_location_title">Family Location</string>
+    <string name="manage_family_title">Manage Your Family</string>
+    <string name="phone_book_post_title">Phone Book Post</string>
+    <string name="my_diary_title">My Diary</string>
+    <string name="profile_title">Profile</string>
+    <string name="about_us_title">About Us</string>
+    <string name="help_title">Help</string>
+    <string name="settings_title">Settings</string>
+    <string name="family_post_message_title">Family Post Message</string>
+    <string name="scan_title">Scan</string>
+    <string name="location_permission_required">Location permission is required for tracking</string>
+    <string name="press_back_again_to_exit">Please click BACK again to exit</string>
+    <string name="please_accept_terms">Please accept the terms to continue.</string>
+    <string name="enter_username">Enter username</string>
+    <string name="enter_valid_email">Enter valid email</string>
+    <string name="enter_valid_mobile">Enter valid mobile</string>
+    <string name="min_2_characters">Min 2 characters</string>
+    <string name="passwords_do_not_match">Passwords do not match</string>
+    <string name="internet_connection_failed">Internet connection failed!</string>
+    <string name="enter_valid_mobile_and_pin">Enter valid mobile and pin!</string>
+    <string name="please_enter_mobile_no">Please enter your mobile No.</string>
+    <string name="please_enter_an_mobile_no">Please enter an mobile No.</string>
 
 </resources>
-
