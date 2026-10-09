@@ -47,10 +47,10 @@ class SignInUpActivity : BaseActivity<ActivitySigninBinding>() {
             )
         }
 
-        binding.IVOK.setOnClickListener { onOkClick() }
+        binding.btSignIn.setOnClickListener { onOkClick() }
 
         binding.tvTrydemo.setOnClickListener {
-            vm.login("9999999999", "1234")
+            vm.login("919999999999", "1234")
         }
 
         observeState()
@@ -62,13 +62,14 @@ class SignInUpActivity : BaseActivity<ActivitySigninBinding>() {
             snack(binding.root, "Internet connection failed!")
             return
         }
-        val email = binding.etEmail.text.toString().trim()
-        val pass = binding.etPassword.text.toString().trim()
-        if (email.isBlank()) {
-            snack(binding.root, "Enter mobile number")
+        val mobile = binding.etMobile.text.toString().trim()
+        val pin = binding.etPassword.text.toString().trim()
+        val code =binding.ccp.selectedCountryCode.toString()
+        if (mobile.isBlank() ||pin.isBlank()) {
+            snack(binding.root, "Enter valid mobile and pin!")
             return
         }
-        vm.login(email, pass)
+        vm.login(code+mobile, pin)
     }
 
     private fun observeState() {

@@ -15,6 +15,7 @@ import com.omsworld.familycare.base.BaseActivity
 import com.omsworld.familycare.core.AppUtil
 import com.omsworld.familycare.core.FieldUtils
 import com.omsworld.familycare.databinding.ActivitySignUpBinding
+import com.omsworld.familycare.ui.main.MainActivity
 import com.omsworld.familycare.ui.settings.TermAndConditionsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -29,15 +30,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     override fun onBindingReady() {
         binding.edtUsername.requestFocus()
-
-        binding.SPCountrycode.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p: AdapterView<*>?, v: View?, pos: Int, id: Long) {
-                vm.setCountryCode(if (pos == 0) "" else vm.getCountry(pos)?.CountryCode ?: "")
-            }
-            override fun onNothingSelected(p: AdapterView<*>?) = Unit
-        }
-
         binding.CKInvitee.setOnClickListener {
             binding.LLInvitationCode.visibility =
                 if (binding.CKInvitee.isChecked) View.VISIBLE else View.GONE
@@ -66,9 +58,10 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
     private fun register() {
         val username = binding.edtUsername.text.toString().trim()
         val email = binding.edtEmail.text.toString().trim()
-        val mobile = binding.edtMobile.text.toString().trim()
-        val password = binding.edtPassword.text.toString()
-        val confirm = binding.edtConfirmPassword.text.toString()
+        val code = binding.SPCountrycode.selectedCountryCode.toString().trim()
+        val mobile = binding.etMobile.text.toString().trim()
+        val password = binding.etPin.text.toString()
+        val confirm = binding.etConfirmPin.text.toString()
         val invite = binding.eTOne.text.toString().trim()
 
         if (!binding.subscriptionCheckbox.isChecked) {
@@ -82,16 +75,16 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
             binding.edtEmail.error = "Enter valid email"; return
         }
         if (mobile.length !in 10..11) {
-            binding.edtMobile.error = "Enter valid mobile"; return
+            binding.etMobile.error = "Enter valid mobile"; return
         }
         if (password.length < 2) {
-            binding.edtPassword.error = "Min 2 characters"; return
+            binding.etPin.error = "Min 2 characters"; return
         }
         if (password != confirm) {
-            binding.edtConfirmPassword.error = "Passwords do not match"; return
+            binding.etConfirmPin.error = "Passwords do not match"; return
         }
 
-        vm.register(username, email, mobile, password, invite)
+        vm.register(username, email, code+mobile, password, invite)
     }
 
     private fun observeState() = lifecycleScope.launch {
@@ -103,7 +96,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
                         binding.btnSubscribe.isEnabled = false
                     }
                     is SignUpUiState.Success -> {
-                        val i = Intent(this@SignUpActivity, VerifyPinActivity::class.java)
+                        val i = Intent(this@SignUpActivity, MainActivity::class.java)
                         i.putExtra("mobile", state.mobile)
                         AppUtil.startActivityWithAnimation(this@SignUpActivity, i)
                         finish()
@@ -112,6 +105,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
                         binding.btnSubscribe.isEnabled = true
                         snack(binding.root, state.msg)
                     }
+                    else -> Unit
                 }
             }
         }

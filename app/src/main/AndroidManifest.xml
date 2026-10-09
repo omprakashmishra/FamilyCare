@@ -168,6 +168,10 @@
             android:name=".ui.shopping.web.ShopInWebActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".ui.shopping.web.ShoppingSitesListActivity"
+            android:exported="false" />
+
         <!-- ============ PROFILE ============ -->
         <activity
             android:name=".ui.profile.ViewImageActivity"

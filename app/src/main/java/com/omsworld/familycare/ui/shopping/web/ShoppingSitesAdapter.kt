@@ -1,49 +1,50 @@
 package com.omsworld.familycare.ui.shopping.web
 
-import android.app.Activity
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.omsworld.familycare.R
 import com.omsworld.familycare.data.model.ShoppingModel
-import de.hdodenhof.circleimageview.CircleImageView
+import com.omsworld.familycare.databinding.ShoppingSitesRowBinding
 
 class ShoppingSitesAdapter(
-    private val context: Context,
-    private val layoutResourceId: Int,
-    private val data: ArrayList<ShoppingModel>
-) : ArrayAdapter<ShoppingModel>(context, layoutResourceId, data) {
+    private val items: MutableList<ShoppingModel> = mutableListOf(),
+    private val onItemClick: (ShoppingModel) -> Unit
+) : RecyclerView.Adapter<ShoppingSitesAdapter.SiteViewHolder>() {
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var row = convertView
-        val holder: RecordHolder
-
-        if (row == null) {
-            val inflater = (context as Activity).layoutInflater
-            row = inflater.inflate(layoutResourceId, parent, false)
-            holder = RecordHolder()
-            holder.txtTitle = row.findViewById(R.id.item_text)
-            holder.imageItem = row.findViewById(R.id.item_image)
-            row.tag = holder
-        } else {
-            holder = row.tag as RecordHolder
-        }
-
-        val item = data[position]
-        holder.txtTitle?.text = item.title
-        holder.imageItem?.load(item.image) {
-            placeholder(R.drawable.shopping_ic)
-            error(R.drawable.shopping_ic)
-        }
-        return row
+    fun submitList(newItems: List<ShoppingModel>) {
+        items.clear()
+        items.addAll(newItems)
+        notifyDataSetChanged()
     }
 
-    class RecordHolder {
-        var txtTitle: TextView? = null
-        var imageItem: CircleImageView? = null
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SiteViewHolder {
+        val binding = ShoppingSitesRowBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return SiteViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: SiteViewHolder, position: Int) {
+        holder.bind(items[position])
+    }
+
+    override fun getItemCount(): Int = items.size
+
+    inner class SiteViewHolder(
+        private val binding: ShoppingSitesRowBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: ShoppingModel) {
+            binding.itemText.text = item.title
+            binding.itemImage.load(item.image) {
+                placeholder(R.drawable.shopping_ic)
+                error(R.drawable.shopping_ic)
+            }
+            binding.root.setOnClickListener { onItemClick(item) }
+        }
     }
 }

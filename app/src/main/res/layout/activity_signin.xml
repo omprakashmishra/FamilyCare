@@ -27,9 +27,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="cursive"
-            android:text="Family Care"
+            android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="22dp" />
+
+        <ProgressBar
+            android:id="@+id/mprogressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@drawable/circular_progressbar"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
@@ -43,7 +52,7 @@
         android:layout_gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingTop="25dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="5dp"
        >
 
         <LinearLayout
@@ -51,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_5dp"
             android:orientation="vertical">
+
 
 
             <LinearLayout
@@ -63,13 +73,6 @@
                 android:orientation="horizontal"
                 android:paddingBottom="4dp">
 
-                <ImageView
-                    android:id="@+id/mobile_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_gravity="left"
-                    android:src="@drawable/ic_phone"
-                    android:visibility="gone"/>
 
 
                 <com.hbb20.CountryCodePicker
@@ -78,74 +81,44 @@
                     android:layout_height="wrap_content"
                     android:nextFocusDown="@+id/number" />
 
-                <EditText
-                    android:id="@+id/et_Email"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMobile"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:hint="Mobile No."
-                    android:inputType="number"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
                     android:maxLength="12"
+                    android:hint="@string/mobile_no"
                     android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/brown"
-                    android:background="@color/transparent"
-                    android:textSize="15dp"
-                    android:visibility="visible" />
-
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
 
-            <EditText
-                android:id="@+id/edt_username"
-                android:layout_width="match_parent"
-                android:layout_height="34dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/rounded_border"
-                android:drawableLeft="@drawable/user_ic"
-                android:drawablePadding="14dp"
-                android:drawableTint="@color/lightGrey"
-                android:fontFamily="sans-serif"
-                android:hint="Name"
-                android:paddingLeft="15dp"
-                android:singleLine="true"
-                android:textColor="@color/theme_dark"
-                android:textColorHint="@color/brown"
-                android:textSize="13dp"
-                android:visibility="visible" />
 
-            <EditText
-                android:id="@+id/et_Password"
-                android:layout_width="200dp"
-                android:layout_height="34dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/rounded_border"
-                android:drawableLeft="@drawable/password_icon"
-                android:drawablePadding="14dp"
-                android:drawableTint="@color/lightGrey"
-                android:fontFamily="sans-serif"
-                android:hint="Pin"
+            <!-- Password -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:layout_marginTop="20dp"
+                android:padding="@dimen/margin_5dp"
+                android:gravity="center"
+                android:background="@color/LightGray"
                 android:inputType="textPassword"
-                android:paddingLeft="20dp"
+                android:maxLength="12"
+                android:layout_gravity="center"
                 android:singleLine="true"
-                android:textColor="@color/black"
-                android:textColorHint="@color/brown"
-                android:textSize="13dp"
-                android:visibility="gone" />
+                android:imeOptions="actionDone"
+                android:textSize="13sp" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 android:gravity="bottom"
-                android:visibility="gone">
+                >
 
                 <Button
                     android:id="@+id/bt_SignIn"
@@ -156,7 +129,7 @@
                     android:layout_marginRight="40dp"
                     android:background="@color/theme_dark"
                     android:gravity="center"
-                    android:text="SIGN IN"
+                    android:text="@string/sign_in"
                     android:textAllCaps="true"
                     android:textColor="#ffffff"
                     android:textSize="13dp"
@@ -169,27 +142,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="vertical"
             android:visibility="visible">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical"
+                android:layout_marginTop="30dp"
                 android:orientation="horizontal"
-                android:visibility="gone">
-
+                android:layout_gravity="center">
                 <View
-                    android:layout_width="match_parent"
+                    android:layout_width="50dp"
                     android:layout_height=".1dp"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="5dp"
+                    android:layout_gravity="center"
                     android:layout_toLeftOf="@+id/account"
-                    android:background="@color/colorPrimary"></View>
+                    android:background="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/account"
@@ -197,110 +166,89 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    android:text="Don't have an account?"
+                    android:text="@string/dont_have_account"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
 
+                <TextView
+                    android:id="@+id/tv_SignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="@dimen/margin_15dp"
+                    android:background="@color/transparent"
+                    android:text="@string/sign_up"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+                    />
+
                 <View
-                    android:layout_width="match_parent"
+                    android:layout_width="50dp"
                     android:layout_height=".1dp"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/account"
-                    android:background="@color/colorPrimary"></View>
-            </RelativeLayout>
+                    android:background="@color/colorPrimary" />
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/tv_SignUp"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="@dimen/margin_20dp"
-                android:background="@color/theme_dark"
-                android:gravity="center"
-                android:text="SIGN UP"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="13dp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_30dp"
-                android:background="@drawable/circular_bg"
-                android:backgroundTint="@color/green">
-
-                <ProgressBar
-                    android:id="@+id/mprogressBar"
-                    style="?android:attr/progressBarStyleLarge"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_centerInParent="true"
-                    android:indeterminateDrawable="@drawable/circular_progressbar"
-                    android:visibility="gone"></ProgressBar>
-
-                <ImageView
-                    android:id="@+id/IV_OK"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ok_red"
-                    android:visibility="visible"
-                    app:tint="@color/white" />
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="5dp"
-                android:gravity="bottom">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp" >
 
                 <TextView
                     android:id="@+id/tv_trydemo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left|bottom"
                     android:layout_marginLeft="15dp"
                     android:paddingBottom="@dimen/margin_5dp"
                     android:paddingTop="@dimen/margin_5dp"
-                    android:text="Try Demo"
+                    android:text="@string/try_demo"
                     android:textColor="@color/theme_dark"
                     android:textSize="13dp" />
+
+                <View
+                    android:layout_width="@dimen/margin_10dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:id="@+id/tv_ForgotPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_gravity="center"
+                    android:layout_gravity="right|bottom"
                     android:paddingBottom="@dimen/margin_5dp"
                     android:paddingRight="@dimen/margin_5dp"
                     android:paddingTop="@dimen/margin_5dp"
-                    android:text="Forgot Password?"
+                    android:text="@string/forgot_password"
                     android:textColor="@color/brown"
                     android:textSize="13dp" />
-            </RelativeLayout>
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_10dp"
-                android:gravity="right"
-                android:onClick="onclick_terms_condition"
-                android:text="Terms &amp; Conditions"
-                android:textColor="@color/brown"
-                android:textSize="@dimen/text_size_12sp"
-                android:textStyle="italic"
-                android:visibility="gone" />
+
         </LinearLayout>
 
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:padding="@dimen/margin_10dp"
+        android:gravity="right"
+        android:onClick="onclick_terms_condition"
+        android:text="@string/terms_and_conditions"
+        android:textColor="@color/brown"
+        android:textSize="@dimen/text_size_12sp"
+        android:textStyle="italic"
+        />
 </LinearLayout>

@@ -27,7 +27,7 @@ import com.omsworld.familycare.ui.main.MainActivity
 import com.omsworld.familycare.ui.news.NewsEventsFragment
 import com.omsworld.familycare.ui.profile.ProfileFragment
 import com.omsworld.familycare.ui.shopping.ShoppingMainActivity
-import com.omsworld.familycare.ui.shopping.web.ShoppingSitesListFragment
+import com.omsworld.familycare.ui.shopping.web.ShoppingSitesListActivity
 import com.omsworld.familycare.ui.tracking.MyTrackingFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -152,7 +152,7 @@ class HomeFragment : BaseFragment<HomeFrBinding>() {
             toast("Coming soon with your family home DoorBell")
         }
         binding.RLHelp.setOnClickListener {
-            openFragment(ShoppingSitesListFragment(), "All In One")
+            startActivity(Intent(requireContext(), ShoppingSitesListActivity::class.java))
         }
         binding.RLManageProfile.setOnClickListener {
             openFragment(ProfileFragment(), "Profile")

@@ -60,6 +60,7 @@ class VerifyPinActivity : BaseActivity<ActivityVerifyOtpBinding>() {
                         binding.btnContinue.isEnabled = true
                         snack(binding.root, state.msg)
                     }
+                    else -> Unit
                 }
             }
         }

@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/appbg"
         android:orientation="vertical">
         <!-- android:background="@drawable/appbg"-->
@@ -28,7 +28,7 @@
             android:layout_marginTop="10dp"
 
             android:background="@drawable/myrect"
-            android:elevation="15dp"></View>
+            android:elevation="15dp" />
 
         <EditText
             android:id="@+id/edt_username"
@@ -41,7 +41,7 @@
             android:layout_marginTop="@dimen/margin_20dp"
             android:background="@drawable/rounded_border"
             android:fontFamily="sans-serif"
-            android:gravity="center"
+
             android:hint="Your full name"
             android:imeOptions="actionNext"
             android:inputType="textNoSuggestions"
@@ -49,23 +49,22 @@
             android:paddingLeft="@dimen/margin_10dp"
             android:singleLine="true"
             android:textSize="@dimen/text_size_12sp" />
-
         <EditText
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_40dp"
-            android:layout_marginLeft="@dimen/margin_15dp"
-            android:layout_marginRight="@dimen/margin_15dp"
+            android:layout_marginStart="@dimen/margin_15dp"
+            android:layout_marginEnd="@dimen/margin_15dp"
             android:layout_marginTop="@dimen/margin_12dp"
             android:background="@drawable/rounded_border"
             android:fontFamily="sans-serif"
-            android:gravity="center"
             android:hint="Email ( optional )"
+            android:inputType="textEmailAddress"
             android:textColor="@color/white"
             android:textColorHint="@color/white_fade"
             android:imeOptions="actionNext"
-            android:inputType="textWebEmailAddress"
-            android:paddingLeft="@dimen/margin_10dp"
+            android:paddingStart="@dimen/margin_10dp"
+            android:paddingEnd="@dimen/margin_10dp"
             android:singleLine="true"
             android:textSize="@dimen/text_size_12sp" />
 
@@ -108,49 +107,28 @@ android:background="@drawable/rounded_border"
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <EditText
-                android:id="@+id/county_code"
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/SPCountrycode"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/margin_40dp"
-                android:background="@null"
-                android:hint=""
-                android:inputType="phone"
-                android:paddingLeft="@dimen/margin_10dp"
-                android:singleLine="true"
-                android:textSize="@dimen/text_size_12sp"
-                android:visibility="gone" />
-
-            <Spinner
-                android:id="@+id/SP_Countrycode"
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:visibility="gone" />
+                android:nextFocusDown="@+id/number" />
 
-            <EditText
-                android:id="@+id/edt_mobile"
-                android:layout_width="0dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etMobile"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:textAlignment="center"
-                android:layout_weight="1"
-                android:background="@null"
-                android:hint="Mobile Number"
-                android:imeOptions="actionNext"
                 android:inputType="phone"
-                android:maxLength="10"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white_fade"
+                android:maxLength="12"
+                android:hint="@string/mobile_no"
+                android:background="@color/transparent"
                 android:singleLine="true"
-                android:textSize="@dimen/text_size_12sp" />
-
+                android:textSize="15sp" />
 
         </LinearLayout>
 
 
         <EditText
-            android:id="@+id/edt_password"
+            android:id="@+id/etPin"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_40dp"
             android:layout_marginLeft="@dimen/margin_15dp"
@@ -158,10 +136,9 @@ android:background="@drawable/rounded_border"
             android:layout_marginTop="@dimen/margin_12dp"
             android:background="@drawable/rounded_border"
             android:fontFamily="sans-serif"
-            android:gravity="center"
             android:textColor="@color/white"
             android:textColorHint="@color/white_fade"
-            android:hint="Password"
+            android:hint="@string/password"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
             android:paddingLeft="@dimen/margin_10dp"
@@ -170,7 +147,7 @@ android:background="@drawable/rounded_border"
 
 
         <EditText
-            android:id="@+id/edt_confirm_password"
+            android:id="@+id/etConfirmPin"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_40dp"
             android:layout_marginLeft="@dimen/margin_15dp"
@@ -178,8 +155,8 @@ android:background="@drawable/rounded_border"
             android:layout_marginTop="@dimen/margin_12dp"
             android:background="@drawable/rounded_border"
             android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:hint="Confirm Password"
+
+            android:hint="Confirm Pin"
             android:imeOptions="actionNext"
             android:textColor="@color/white"
             android:textColorHint="@color/white_fade"
