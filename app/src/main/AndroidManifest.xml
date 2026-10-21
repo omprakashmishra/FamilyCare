@@ -37,6 +37,9 @@
 
     <uses-feature android:name="android.hardware.location.gps" android:required="false" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
 
     <!-- ==================== INTENT VISIBILITY (Android 11+) ==================== -->
     <queries>
@@ -108,7 +111,7 @@
 
         <!-- ============ AUTH ============ -->
         <activity
-            android:name=".ui.auth.SignInUpActivity"
+            android:name=".ui.auth.SignInActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />

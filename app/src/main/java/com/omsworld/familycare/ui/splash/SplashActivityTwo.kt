@@ -13,7 +13,7 @@ import com.omsworld.familycare.R
 import com.omsworld.familycare.base.BaseActivity
 import com.omsworld.familycare.core.AppUtil
 import com.omsworld.familycare.databinding.SplashTwoBinding
-import com.omsworld.familycare.ui.auth.SignInUpActivity
+import com.omsworld.familycare.ui.auth.SignInActivity
 import com.omsworld.familycare.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -121,7 +121,7 @@ class SplashActivityTwo : BaseActivity<SplashTwoBinding>() {
             val next = if (vm.isLoggedIn()) {
                 Intent(this, MainActivity::class.java)
             } else {
-                Intent(this, SignInUpActivity::class.java)
+                Intent(this, SignInActivity::class.java)
             }
             AppUtil.startActivityWithAnimation(this, next)
             finish()

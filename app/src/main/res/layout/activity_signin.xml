@@ -248,7 +248,7 @@
         android:onClick="onclick_terms_condition"
         android:text="@string/terms_and_conditions"
         android:textColor="@color/brown"
-        android:textSize="@dimen/text_size_12sp"
+        android:textSize="@dimen/_10sdp"
         android:textStyle="italic"
         />
 </LinearLayout>

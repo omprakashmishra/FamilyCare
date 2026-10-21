@@ -33,7 +33,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="@dimen/margin_10dp"
                 android:textColor="#000000"
-                android:textSize="@dimen/text_size_12sp" />
+                android:textSize="@dimen/_10sdp" />
         </LinearLayout>
 
         <LinearLayout

@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
@@ -27,7 +26,7 @@ import com.omsworld.familycare.core.Constants
 import com.omsworld.familycare.databinding.ActivityMainBinding
 import com.omsworld.familycare.databinding.NotificationAlertBinding
 import com.omsworld.familycare.service.TrackingService
-import com.omsworld.familycare.ui.auth.SignInUpActivity
+import com.omsworld.familycare.ui.auth.SignInActivity
 import com.omsworld.familycare.ui.chat.FriendsListFragment
 import com.omsworld.familycare.ui.contacts.SharedContactsFragment
 import com.omsworld.familycare.ui.diary.DiaryFragment
@@ -358,7 +357,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun logout() {
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         vm.logout()
-        val intent = Intent(this, SignInUpActivity::class.java)
+        val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
         finish()
     }

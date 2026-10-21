@@ -100,7 +100,7 @@
                         android:gravity="center_vertical|left"
                         android:text=""
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size_12sp" />
+                        android:textSize="@dimen/_10sdp" />
                 </LinearLayout>
 
                 <View
@@ -134,7 +134,7 @@
                         android:gravity="center_vertical|left"
                         android:text=""
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size_12sp" />
+                        android:textSize="@dimen/_10sdp" />
                 </LinearLayout>
 
                 <View
@@ -167,7 +167,7 @@
                         android:gravity="center_vertical|left"
                         android:text=""
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size_12sp" />
+                        android:textSize="@dimen/_10sdp" />
                 </LinearLayout>
 
                 <View
@@ -200,7 +200,7 @@
                         android:gravity="center_vertical|left"
                         android:text=""
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size_12sp" />
+                        android:textSize="@dimen/_10sdp" />
                 </LinearLayout>
 
                 <View
@@ -233,7 +233,7 @@
                         android:gravity="center_vertical|left"
                         android:text=""
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_size_12sp" />
+                        android:textSize="@dimen/_10sdp" />
                 </LinearLayout>
 
                 <View
@@ -273,7 +273,7 @@
                             android:gravity="center_vertical|left"
                             android:text=""
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/text_size_12sp" />
+                            android:textSize="@dimen/_10sdp" />
 
                         <TextView
                             android:id="@+id/TV_paymentdate"

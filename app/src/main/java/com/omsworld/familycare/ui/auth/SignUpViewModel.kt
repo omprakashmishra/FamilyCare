@@ -8,6 +8,7 @@ import com.omsworld.familycare.data.model.CountryCodeModel
 import com.omsworld.familycare.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 sealed interface SignUpUiState {
@@ -54,5 +55,20 @@ class SignUpViewModel @Inject constructor(
             .onError { msg, _ ->
                 setState(SignUpUiState.Error(msg))
             }
+    }
+
+    fun signInWithGoogle(idToken: String, email: String, name: String) = viewModelScope.launch {
+        setState(SignUpUiState.Loading)
+
+        val userId = "google_${System.currentTimeMillis()}"
+        authRepo.register(
+            userId = userId,
+            userName = name,
+            email = email,
+            mobile = "",
+            password = ""
+        )
+            .onSuccess { setState(SignUpUiState.Success("")) }
+            .onError { msg, _ -> setState(SignUpUiState.Error(msg)) }
     }
 }

@@ -24,26 +24,20 @@ android {
         vectorDrawables { useSupportLibrary = true }
         multiDexEnabled = true
 
-        // ===== Read secrets from local.properties =====
         val localProps = Properties()
-        val localFile = rootProject.file("local.properties")
-        if (localFile.exists()) {
-            localProps.load(localFile.inputStream())
+        rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use {
+            localProps.load(it)
         }
 
-        // Maps API key (for AndroidManifest placeholder)
         manifestPlaceholders["MAPS_API_KEY"] =
             localProps.getProperty("MAPS_API_KEY") ?: ""
 
-        // ===== Supabase config =====
         buildConfigField(
-            "String",
-            "SUPABASE_URL",
+            "String", "SUPABASE_URL",
             "\"${localProps.getProperty("SUPABASE_URL") ?: ""}\""
         )
         buildConfigField(
-            "String",
-            "SUPABASE_ANON_KEY",
+            "String", "SUPABASE_ANON_KEY",
             "\"${localProps.getProperty("SUPABASE_ANON_KEY") ?: ""}\""
         )
     }
@@ -108,6 +102,9 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.multidex)
 
+    implementation("com.intuit.sdp:sdp-android:1.1.1")
+    implementation("com.intuit.ssp:ssp-android:1.1.1")
+
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
@@ -152,6 +149,11 @@ dependencies {
     implementation(libs.zxing.android.embedded)
     implementation(libs.ccp)
     implementation(libs.circleindicator)
+
+    // ---- Google Sign-In (Credential Manager) ----
+    implementation("androidx.credentials:credentials:1.3.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

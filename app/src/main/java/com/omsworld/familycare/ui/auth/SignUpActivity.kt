@@ -1,10 +1,7 @@
 package com.omsworld.familycare.ui.auth
-
 import android.content.Intent
 import android.util.Patterns
 import android.view.LayoutInflater
-import android.view.View
-import android.widget.AdapterView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
@@ -19,21 +16,33 @@ import com.omsworld.familycare.ui.main.MainActivity
 import com.omsworld.familycare.ui.settings.TermAndConditionsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import androidx.credentials.CredentialManager
+import androidx.credentials.CustomCredential
+import androidx.credentials.GetCredentialRequest
+import androidx.credentials.exceptions.GetCredentialCancellationException
+import androidx.credentials.exceptions.GetCredentialException
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
+import timber.log.Timber
 
 @AndroidEntryPoint
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
 
     private val vm: SignUpViewModel by viewModels()
+    private lateinit var credentialManager: CredentialManager
 
     override fun inflateBinding(inflater: LayoutInflater) =
         ActivitySignUpBinding.inflate(inflater)
 
     override fun onBindingReady() {
+        credentialManager = CredentialManager.create(this)
+
         binding.edtUsername.requestFocus()
-        binding.CKInvitee.setOnClickListener {
-            binding.LLInvitationCode.visibility =
-                if (binding.CKInvitee.isChecked) View.VISIBLE else View.GONE
-        }
+//        binding.CKInvitee.setOnClickListener {
+//            binding.LLInvitationCode.visibility =
+//                if (binding.CKInvitee.isChecked) View.VISIBLE else View.GONE
+//        }
 
         binding.subscriptionCheckbox.setOnClickListener {
             val on = binding.subscriptionCheckbox.isChecked
@@ -51,6 +60,7 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
         }
 
         binding.btnSubscribe.setOnClickListener { register() }
+        binding.btnGoogleSignIn.setOnClickListener { launchGoogleSignIn() }
 
         observeState()
     }
@@ -110,4 +120,63 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
             }
         }
     }
+
+    private fun launchGoogleSignIn() {
+        val webClientId = getString(R.string.default_web_client_id)
+        if (webClientId.isBlank()) {
+            snack(binding.root, "Google Sign-In is not configured.")
+            return
+        }
+
+        // Key: use GetGoogleIdOption to request an ID Token
+        val googleIdOption = GetGoogleIdOption.Builder()
+            .setFilterByAuthorizedAccounts(false)   // false = show all accounts, suitable for new users
+            .setAutoSelectEnabled(false)
+            .setServerClientId(webClientId)
+            .build()
+
+        val request = GetCredentialRequest.Builder()
+            .addCredentialOption(googleIdOption)
+            .build()
+
+        binding.btnGoogleSignIn.isEnabled = false
+
+        lifecycleScope.launch {
+            try {
+                val result = credentialManager.getCredential(
+                    context = this@SignUpActivity,
+                    request = request
+                )
+                handleGoogleCredential(result.credential)
+            } catch (e: GetCredentialCancellationException) {
+                Timber.i("Google sign-in cancelled by user")
+            } catch (e: GetCredentialException) {
+                Timber.e(e, "Google sign-in failed")
+                snack(binding.root, "Google sign-in failed. Try again.")
+            } finally {
+                binding.btnGoogleSignIn.isEnabled = true
+            }
+        }
+    }
+    private fun handleGoogleCredential(credential: androidx.credentials.Credential) {
+        if (credential is CustomCredential &&
+            credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
+        ) {
+            try {
+                val google = GoogleIdTokenCredential.createFrom(credential.data)
+                // Pass the ID Token to the ViewModel (your existing method)
+                vm.signInWithGoogle(
+                    idToken = google.idToken,
+                    email = google.id,
+                    name = google.displayName.orEmpty()
+                )
+            } catch (e: GoogleIdTokenParsingException) {
+                Timber.e(e, "Failed to parse Google credential")
+                snack(binding.root, "Google sign-in failed")
+            }
+        } else {
+            Timber.w("Unexpected credential type: ${credential.type}")
+        }
+    }
+    //--------
 }

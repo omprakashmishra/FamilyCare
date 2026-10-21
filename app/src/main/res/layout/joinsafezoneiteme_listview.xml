@@ -51,7 +51,7 @@
             android:layout_marginTop="@dimen/margin_5dp"
             android:text="Name:fadsfasdfdafdasfdasf"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_12sp" />
+            android:textSize="@dimen/_10sdp" />
 
 
         <TextView

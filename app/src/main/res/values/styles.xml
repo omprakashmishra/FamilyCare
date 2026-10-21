@@ -1,32 +1,46 @@
 <resources>
 
+    <!-- ============================================================
+         App theme — must descend from Theme.MaterialComponents
+         so TextInputLayout / MaterialButton / MaterialCardView inflate.
+         Superset of AppCompat → nothing else in your app breaks.
+         ============================================================ -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
 
-
- <!--   <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
-
-    </style>-->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Action bar / status bar -->
         <item name="android:actionMenuTextColor">@color/actionBarText</item>
-
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorOnSecondary">@color/white</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
-    
+
         <!-- navigation icon color -->
         <item name="colorControlNormal">@color/white</item>
+
+        <!-- Default TextInputLayout style so you don't need to set it per-widget -->
+        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
+
+        <!-- Snackbar / buttons that use MaterialButton -->
+        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
     </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- Popup menus, dialogs, tooltips -->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
+    <!-- Slide-up/down dialog animation -->
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_down</item>
         <item name="android:windowExitAnimation">@anim/slide_up</item>
     </style>
 
-    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <!-- Alert dialogs -->
+    <style name="MyAlertDialogStyle" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
         <!-- Used for the buttons -->
         <item name="colorAccent">#FFC107</item>
         <!-- Used for the title and text -->
@@ -34,7 +48,9 @@
         <!-- Used for the background -->
         <item name="android:background">#4CAF50</item>
     </style>
-    <style name="AppTheme.Splash" parent="Theme.AppCompat.Light.NoActionBar">
+
+    <!-- Splash theme -->
+    <style name="AppTheme.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">false</item>

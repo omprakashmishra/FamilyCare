@@ -76,7 +76,7 @@
                     android:layout_weight="30"
                     android:text="Name:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_12sp"
+                    android:textSize="@dimen/_10sdp"
 
                     android:textStyle="bold" />
 
@@ -98,7 +98,7 @@
                     android:layout_weight=".30"
                     android:text="Email:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_12sp"
+                    android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -108,7 +108,7 @@
                     android:layout_weight=".70"
                     android:text="Address:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_12sp"
+                    android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
 
 
@@ -256,7 +256,7 @@
                     android:layout_weight="30"
                     android:text="Contact Type:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_12sp"
+                    android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
 
 
@@ -266,7 +266,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="70"
                     android:text="hello"
-                    android:textSize="@dimen/text_size_12sp"
+                    android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

@@ -101,7 +101,6 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     protected fun snack(view: View, msg: String) {
         Snackbar.make(view, msg, Snackbar.LENGTH_LONG).apply {
-            view.setBackgroundColor(Color.parseColor("#8c1212"))
             show()
         }
     }

@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -23,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SignInUpActivity : BaseActivity<ActivitySigninBinding>() {
+class SignInActivity : BaseActivity<ActivitySigninBinding>() {
 
     private val vm: SignInUpViewModel by viewModels()
 
@@ -86,8 +85,8 @@ class SignInUpActivity : BaseActivity<ActivitySigninBinding>() {
                             is SignInUiState.Success -> {
                                 binding.mprogressBar.visibility = View.GONE
                                 AppUtil.startActivityWithAnimation(
-                                    this@SignInUpActivity,
-                                    Intent(this@SignInUpActivity, MainActivity::class.java)
+                                    this@SignInActivity,
+                                    Intent(this@SignInActivity, MainActivity::class.java)
                                 )
                                 finish()
                             }
@@ -97,9 +96,9 @@ class SignInUpActivity : BaseActivity<ActivitySigninBinding>() {
                             }
                             is SignInUiState.NeedsOtp -> {
                                 binding.mprogressBar.visibility = View.GONE
-                                val i = Intent(this@SignInUpActivity, VerifyPinActivity::class.java)
+                                val i = Intent(this@SignInActivity, VerifyPinActivity::class.java)
                                 i.putExtra("mobile", state.mobile)
-                                AppUtil.startActivityWithAnimation(this@SignInUpActivity, i)
+                                AppUtil.startActivityWithAnimation(this@SignInActivity, i)
                                 finish()
                             }
                             else -> Unit

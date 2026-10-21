@@ -32,7 +32,7 @@
                 android:text="Name:"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_12sp"
+                android:textSize="@dimen/_10sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -43,7 +43,7 @@
                 android:text=""
                 android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_12sp" />
+                android:textSize="@dimen/_10sdp" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -91,7 +91,7 @@
                 android:text="Phone:"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_12sp"
+                android:textSize="@dimen/_10sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -103,7 +103,7 @@
                 android:inputType="phone"
                 android:textColor="@color/highdarkgrey"
                 android:textColorHint="@color/highdarkgrey"
-                android:textSize="@dimen/text_size_12sp" />
+                android:textSize="@dimen/_10sdp" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -138,7 +138,7 @@
                 android:text="Status:"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_12sp"
+                android:textSize="@dimen/_10sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -151,7 +151,7 @@
 
                 android:textColor="@color/highdarkgrey"
                 android:textColorHint="@color/highdarkgrey"
-                android:textSize="@dimen/text_size_12sp" />
+                android:textSize="@dimen/_10sdp" />
 
 
         </LinearLayout>

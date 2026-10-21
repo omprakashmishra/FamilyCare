@@ -1,7 +1,7 @@
 <resources>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="default_web_client_id">637264740269-jjvuljm9j2is5ikld539gn91tq7k5bst.apps.googleusercontent.com</string>
     <!--<string name="url_android_service">http://182.74.251.115/wcftecGuard/TecSafer.svc</string>-->
     <!--<string name="url_android_service">http://182.74.251.115/WCFTecGuard/TecSafer.svc</string>-->
     <!-- <string name="url_android_service">http://wcfcoc.com/TecSafer.svc</string>-->
@@ -107,8 +107,19 @@
     <string name="try_demo">Try Demo</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="terms_and_conditions">Terms &amp; Conditions</string>
-    <string name="password">Pin</string>
-
+    <string name="sign_up_title">Create your account</string>
+    <string name="sign_up_subtitle">Join FamilyCare to stay connected with your loved ones.</string>
+    <string name="full_name">Full name</string>
+    <string name="email_optional">Email (optional)</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="invitation_code">Invitation code</string>
+    <string name="register">Register</string>
+    <string name="or">OR</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="log_in">Log in</string>
+    <string name="terms_prefix">I agree to the</string>
 
 </resources>
 

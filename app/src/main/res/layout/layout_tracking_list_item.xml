@@ -89,7 +89,7 @@
                     android:singleLine="true"
                     android:text="Sandeep Kumar kesarwani "
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_12sp" />
+                    android:textSize="@dimen/_10sdp" />
 
                 <ImageView
                     android:id="@+id/battery"

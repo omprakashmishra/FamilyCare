@@ -28,7 +28,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:textColor="@color/green"
-                android:textSize="@dimen/text_size_12sp" />
+                android:textSize="@dimen/_10sdp" />
         </LinearLayout>
 
         <LinearLayout
